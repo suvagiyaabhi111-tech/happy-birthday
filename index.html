@@ -801,7 +801,7 @@ const LABELS = ['Envelope', 'Birthday cake', 'Balloons', 'Gift', 'Letter'];
 const BUILD = [
   d => `<div class="stack env-stack">
     <p class="eyebrow">From ${esc(d.from)}, with love</p>
-    <h1 class="title" tabindex="-1">Guess whose birthday it is?</h1>
+    <h1 class="title" tabindex="-1">A little sunshine, just for you</h1>
     <div class="env-wrap"><button class="envelope" id="envelope" type="button" aria-label="Open the envelope for ${esc(d.name)}">
       <svg class="env-back" viewBox="0 0 300 200" aria-hidden="true"><defs><linearGradient id="envIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D99516"/><stop offset=".55" stop-color="${C.butterDeep}"/></linearGradient></defs><rect x="2" y="2" width="296" height="196" rx="12" fill="url(#envIn)" ${K3}/></svg>
       <span class="env-letter" aria-hidden="true"><span class="peek">${sunflowerSvg('a')}</span></span>
