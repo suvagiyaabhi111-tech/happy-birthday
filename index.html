@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Happy Birthday, Soul Sister!</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="A little birthday surprise is waiting for you. Tap the heart to open it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://suvagiyaabhi111-tech.github.io/happy-birthday/">
+<meta property="og:title" content="A little birthday surprise for you 💛">
+<meta property="og:description" content="Tap the heart to open it.">
+<meta property="og:image" content="https://suvagiyaabhi111-tech.github.io/happy-birthday/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFD3DF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M12%2020.5C6%2016.5%202.5%2013%202.5%209%202.5%206.2%204.6%204%207.2%204c2%200%203.7%201.2%204.8%203%201.1-1.8%202.8-3%204.8-3%202.6%200%204.7%202.2%204.7%205%200%204-3.5%207.5-9.5%2011.5z%27%20fill%3D%27%23F0386B%27%20stroke%3D%27%234A2420%27%20stroke-width%3D%271.6%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Patrick+Hand&display=swap">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style id="card-style">/* Layout: one-screen stage; five scenes stacked in place and swapped like pages of a pop-up card; content column max 460px */
+:root{
+  --bg:#FFD3DF; --night:#2B1520; --ink:#4A2420; --ink-soft:#8A5149; --paper:#FFFBF4; --cream:#FFE9D2;
+  --cherry:#F0386B; --cherry-dark:#C41F4E; --butter:#FFD45C; --mint:#7DDCC0; --sky:#86C8FF; --lilac:#C6A8FF; --tangerine:#FF9F5A; --pink:#FF8FB3;
+  --display:"DynaPuff", ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  --hand:"Patrick Hand", "Segoe Print", "Bradley Hand", "Chalkboard SE", "Comic Sans MS", cursive;
+  color-scheme: light;
+}
+html{height:100%; box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box}
+body{height:100%; margin:0; overflow:hidden; background:var(--bg); color:var(--ink); font-family:var(--display); -webkit-tap-highlight-color:transparent; transition:background-color .9s ease}
+body.dark{--bg:var(--night)}
+body.instant, body.instant *{transition:none !important}
+button{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--sky); outline-offset:3px; border-radius:12px}
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+#bg,#fx{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; display:block}
+#bg{z-index:0; transition:opacity .9s ease}
+body.dark #bg{opacity:.12}
+#fx{z-index:40}
+#app{position:relative; z-index:1; height:100%}
+
+/* top bar: bunting doubles as the progress tracker */
+.topbar{position:fixed; top:0; left:0; right:0; z-index:30; display:grid; grid-template-columns:1fr auto 1fr; align-items:start; gap:8px;
+  padding-top:calc(env(safe-area-inset-top,0px) + 6px); padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); pointer-events:none}
+.topbar > *{pointer-events:auto}
+.bunting{grid-column:2; width:min(52vw, 220px); height:auto; display:block; overflow:visible; pointer-events:none}
+.bunting .string{fill:none; stroke:var(--ink); stroke-width:2.5; stroke-linecap:round; transition:stroke .9s}
+body.dark .bunting .string{stroke:var(--cream)}
+.bunting .flag-g{transform-box:fill-box; transform-origin:50% 0; transform:rotate(var(--a))}
+.bunting .flag-g.now{animation:flutter 1.4s ease-in-out infinite}
+.bunting .flag{fill:var(--paper); stroke:var(--ink); stroke-width:2.5; stroke-linejoin:round; transition:fill .5s}
+.bunting .flag.on{fill:var(--fc)}
+@keyframes flutter{0%,100%{transform:rotate(var(--a))} 50%{transform:rotate(calc(var(--a) + 9deg))}}
+.icon-btn{grid-column:3; justify-self:end; width:44px; height:44px; border-radius:50%; border:2.5px solid var(--ink); background:var(--paper); display:grid; place-items:center; box-shadow:0 3px 0 var(--ink); cursor:pointer; padding:0}
+.icon-btn svg{width:22px; height:22px; display:block}
+.icon-btn:active{transform:translateY(2px); box-shadow:0 1px 0 var(--ink)}
+.edit-btn{grid-column:1; grid-row:1; justify-self:start; display:inline-flex; align-items:center; gap:6px; height:40px; padding:0 14px 0 11px; border-radius:999px; border:2.5px solid var(--ink); background:var(--butter); font:600 14px/1 var(--display); box-shadow:0 3px 0 var(--ink); cursor:pointer}
+.edit-btn svg{width:16px; height:16px}
+.edit-btn:active{transform:translateY(2px); box-shadow:0 1px 0 var(--ink)}
+
+/* scenes */
+.scene{position:absolute; inset:0; display:flex; flex-direction:column; overflow-x:hidden; overflow-y:auto;
+  padding-block:64px 22px; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px));
+  opacity:0; visibility:hidden; transform:translateY(18px) scale(.98); transition:opacity .5s ease, transform .5s ease, visibility 0s linear .5s}
+.scene.on{opacity:1; visibility:visible; transform:none; transition:opacity .55s ease .2s, transform .6s cubic-bezier(.2,.8,.2,1) .2s, visibility 0s}
+.stack{margin:auto; width:100%; max-width:460px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center}
+.eyebrow{margin:0; font:600 13px/1 var(--display); letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft)}
+.title{margin:0; font:700 clamp(30px, 8.6vw, 42px)/1.08 var(--display); color:var(--ink); text-wrap:balance; overflow-wrap:anywhere; text-shadow:0 3px 0 rgba(255,255,255,.7); transition:color .6s, text-shadow .6s}
+.title:focus{outline:none}
+.title.small{font-size:clamp(26px, 7vw, 34px)}
+body.dark .scene-cake .title{color:var(--cream); text-shadow:0 2px 16px rgba(255,190,110,.4)}
+body.dark .scene-cake .hint{color:#EBC3B2}
+.hint{margin:0; max-width:30ch; font:400 clamp(19px, 5vw, 22px)/1.3 var(--hand); color:var(--ink-soft); text-wrap:balance; transition:color .6s, opacity .4s}
+.word{display:inline-block; white-space:nowrap}
+.ch{display:inline-block; animation:pop-in .6s cubic-bezier(.3,1.6,.5,1) both; animation-delay:calc(var(--i) * 45ms)}
+@keyframes pop-in{0%{transform:translateY(24px) scale(.3); opacity:0} 100%{transform:none; opacity:1}}
+.pill{display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:999px; background:var(--paper); border:2px solid var(--ink); font:600 13px/1 var(--display); font-variant-numeric:tabular-nums}
+
+.btn{appearance:none; border:2.5px solid var(--ink); border-radius:999px; background:var(--cherry); color:#fff; font:600 17px/1 var(--display); padding:14px 22px 14px 24px; box-shadow:0 4px 0 var(--ink); cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:transform .12s, box-shadow .12s}
+.btn:active{transform:translateY(3px); box-shadow:0 1px 0 var(--ink)}
+.btn.quiet{background:var(--paper); color:var(--ink)}
+.btn svg{width:18px; height:18px; flex:none}
+.reveal-later{opacity:0; visibility:hidden; transform:translateY(10px) scale(.92); transition:opacity .45s, transform .5s cubic-bezier(.3,1.5,.5,1), visibility 0s linear .5s}
+.reveal-later.show{opacity:1; visibility:visible; transform:none; transition:opacity .45s, transform .5s cubic-bezier(.3,1.5,.5,1), visibility 0s}
+.reveal-later.show:active{transform:translateY(3px)}
+
+/* scene 1: envelope */
+.env-wrap{width:min(86vw, 360px); margin-top:clamp(36px, 12vh, 96px)}
+.envelope{position:relative; display:block; width:100%; aspect-ratio:3/2; padding:0; border:0; background:none; cursor:pointer; perspective:900px; animation:env-float 3.4s ease-in-out infinite; border-radius:14px}
+@keyframes env-float{0%,100%{transform:translateY(0) rotate(-1.5deg)} 50%{transform:translateY(-8px) rotate(1.5deg)}}
+.envelope.opening{animation:none; transform:none; transition:transform .3s; cursor:default}
+.envelope > *{position:absolute}
+.env-back,.env-pocket,.env-flap{inset:0; width:100%; height:100%; overflow:visible; display:block}
+.env-back{z-index:0}
+.env-letter{z-index:2; left:8%; right:8%; top:7%; height:82%; border:2.5px solid var(--ink); border-radius:10px; display:grid; align-content:start; justify-items:center; padding-top:9%;
+  background:radial-gradient(circle at 14% 18%, var(--sky) 0 3px, transparent 3.5px), radial-gradient(circle at 86% 26%, var(--butter) 0 3px, transparent 3.5px), radial-gradient(circle at 22% 52%, var(--mint) 0 3px, transparent 3.5px), radial-gradient(circle at 80% 56%, var(--lilac) 0 3px, transparent 3.5px), var(--paper);
+  transition:transform .85s cubic-bezier(.2,.9,.25,1.12)}
+.env-letter .peek{font:700 clamp(19px, 5.6vw, 25px)/1.05 var(--display); color:var(--cherry)}
+.env-pocket{z-index:3}
+.env-flap{z-index:4; transform-origin:50% 2%; transition:transform .6s cubic-bezier(.45,0,.2,1)}
+.seal{z-index:5; left:50%; top:60.5%; width:21%; aspect-ratio:1; transform:translate(-50%,-50%); transition:transform .35s cubic-bezier(.5,-.6,.5,1.6), opacity .3s .05s}
+.seal svg{width:100%; height:100%; display:block; overflow:visible; animation:seal-pulse 1.8s ease-in-out infinite}
+@keyframes seal-pulse{0%,100%{transform:scale(1)} 50%{transform:scale(1.08)}}
+.envelope.opening .seal{transform:translate(-50%,-50%) scale(1.5) rotate(30deg); opacity:0}
+.envelope.flap-open .env-flap{transform:rotateX(180deg)}
+.envelope.flap-behind .env-flap{z-index:1}
+.envelope.letter-out .env-letter{transform:translateY(-60%)}
+.env-to{z-index:6; left:7%; bottom:10%; max-width:50%; display:flex; flex-direction:column; align-items:flex-start; gap:1px; text-align:left; pointer-events:none;
+  background:var(--paper); border:2px solid var(--ink); border-radius:10px; padding:5px 12px 7px; transform:rotate(-3deg); box-shadow:0 3px 0 rgba(74,36,32,.25)}
+.env-to small{font:400 17px/1 var(--hand); color:var(--ink-soft)}
+.env-to b{font:700 clamp(18px, 5.4vw, 24px)/1.05 var(--display); color:var(--ink); overflow-wrap:anywhere}
+.stamp{z-index:6; right:6%; bottom:9%; width:16%; transform:rotate(6deg); pointer-events:none}
+.postmark{z-index:7; right:3%; bottom:32%; width:28%; transform:rotate(-12deg); color:rgba(74,36,32,.5); pointer-events:none}
+.stamp svg,.postmark svg{display:block; width:100%; height:auto; overflow:visible}
+.stamp text,.postmark text{font-family:var(--display); font-weight:700}
+
+/* scene 2: cake (lights go down while the candles burn) */
+.cake-wrap{--cw:min(78vw, 300px, 44vh); --k:calc(var(--cw) / 300); position:relative; width:var(--cw); height:calc(var(--k) * 320); touch-action:none; user-select:none; -webkit-user-select:none}
+.cake-glow{position:absolute; left:50%; top:28%; width:150%; aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%; pointer-events:none; opacity:0; transition:opacity .7s;
+  background:radial-gradient(circle, rgba(255,198,112,.5) 0, rgba(255,170,90,.18) 34%, rgba(255,170,90,0) 62%)}
+body.dark .cake-glow{opacity:var(--lit,1)}
+.cake-svg{position:absolute; inset:0; width:100%; height:100%; overflow:visible; transition:filter .7s ease}
+body.dark .cake-svg{filter:brightness(var(--bright,.8)) saturate(.9)}
+.cake-svg .yay{opacity:0} .cake-wrap.happy .cake-svg .yay{opacity:1} .cake-wrap.happy .cake-svg .wish{opacity:0}
+.candle{position:absolute; left:calc(var(--x) * var(--k)); top:calc(var(--y) * var(--k)); width:calc(26 * var(--k)); height:calc((var(--h) + 36) * var(--k)); transform:translate(-50%,-100%); padding:0; border:0; background:none; cursor:pointer; display:block; border-radius:8px}
+.candle .stick{position:absolute; bottom:0; left:50%; width:calc(11 * var(--k)); height:calc(var(--h) * var(--k)); transform:translateX(-50%); border:2px solid var(--ink); border-radius:3px 3px 1px 1px;
+  background:repeating-linear-gradient(-55deg, var(--c) 0 calc(4 * var(--k)), #fff calc(4 * var(--k)) calc(8 * var(--k)))}
+.candle .wick{position:absolute; left:50%; bottom:calc(var(--h) * var(--k) - 1px); width:2px; height:calc(6 * var(--k)); margin-left:-1px; background:var(--ink); border-radius:1px}
+.candle .flame{position:absolute; left:50%; bottom:calc((var(--h) + 4) * var(--k)); width:calc(14 * var(--k)); height:calc(22 * var(--k)); margin-left:calc(-7 * var(--k));
+  border-radius:50% 50% 50% 50% / 62% 62% 38% 38%; background:radial-gradient(ellipse at 50% 78%, #FFFBE8 0 22%, #FFE27A 44%, #FFA94D 74%, #FF7A3D 100%);
+  box-shadow:0 0 calc(12 * var(--k)) calc(4 * var(--k)) rgba(255,190,90,.5); transform-origin:50% 90%;
+  animation:ignite .45s cubic-bezier(.3,1.7,.5,1) both, flicker var(--d,1.1s) ease-in-out .45s infinite; transition:transform .25s, opacity .25s}
+@keyframes ignite{0%{transform:scale(0) translateY(6px)} 100%{transform:scale(1)}}
+@keyframes flicker{0%,100%{transform:scale(1) rotate(-2deg)} 30%{transform:scale(1.07,.93) rotate(2.5deg)} 55%{transform:scale(.94,1.08) rotate(-1deg)} 80%{transform:scale(1.03,.97) rotate(1.5deg)}}
+.candle.unlit .flame,.candle.out .flame{animation:none; transform:scale(0) translateY(4px); opacity:0}
+.candle.out{cursor:default}
+.candle .smoke{position:absolute; left:50%; bottom:calc((var(--h) + 6) * var(--k)); width:calc(9 * var(--k)); height:calc(9 * var(--k)); margin-left:calc(-4.5 * var(--k)); border-radius:50%; background:rgba(210,190,184,.75); opacity:0; pointer-events:none}
+.candle .smoke::after{content:""; position:absolute; inset:0; border-radius:50%; background:inherit; opacity:0}
+.candle.out .smoke,.candle.out .smoke::after{animation:smoke 1.9s ease-out forwards}
+.candle.out .smoke::after{animation-delay:.3s}
+@keyframes smoke{0%{opacity:.85; transform:translate(0,0) scale(.6)} 100%{opacity:0; transform:translate(calc(8 * var(--k)), calc(-56 * var(--k))) scale(2.6)}}
+
+/* scene 3: balloons */
+.balloon-grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; width:100%; max-width:420px; margin-top:4px}
+.cell{position:relative; height:clamp(138px, 21vh, 168px); display:grid; place-items:center}
+.balloon{position:relative; width:min(100%, 84px); height:100%; padding:0; border:0; background:none; cursor:pointer; animation:rise 1.1s cubic-bezier(.2,.9,.3,1.12) both; animation-delay:var(--delay); border-radius:40px}
+.balloon .bob{display:block; width:100%; height:100%; animation:bob var(--dur) ease-in-out var(--neg) infinite; transform-origin:50% 90%}
+.balloon svg{width:100%; height:100%; display:block; overflow:visible}
+@keyframes rise{0%{transform:translateY(130%); opacity:0} 100%{transform:none; opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-9px) rotate(4deg)}}
+.balloon.popped{animation:pop .2s ease-in forwards; pointer-events:none}
+@keyframes pop{0%{transform:scale(1)} 60%{transform:scale(1.28)} 100%{transform:scale(1.45); opacity:0}}
+.note{position:absolute; inset:8px 2px 4px; display:grid; place-items:center; overflow:auto; padding:12px 9px 10px; border:2px solid var(--ink); border-radius:12px; box-shadow:0 3px 0 var(--ink);
+  background:color-mix(in srgb, var(--c) 28%, var(--paper)); font:400 clamp(16px, 4.3vw, 19px)/1.18 var(--hand); color:var(--ink); text-wrap:balance; overflow-wrap:anywhere;
+  transform:rotate(var(--r)); animation:note-in .55s cubic-bezier(.3,1.5,.5,1) both}
+.note.long{font-size:clamp(14px, 3.8vw, 16px)}
+.note::before{content:""; position:absolute; top:-9px; left:50%; width:16px; height:16px; margin-left:-8px; border-radius:50%; background:var(--c); border:2px solid var(--ink)}
+@keyframes note-in{0%{transform:scale(.3) rotate(calc(var(--r) * -4)); opacity:0} 100%{transform:scale(1) rotate(var(--r)); opacity:1}}
+
+/* scene 4: gift */
+.gift-stage{--gs:min(84vw, 320px, 46vh); position:relative; width:var(--gs); height:calc(var(--gs) * 1.08)}
+.gift{position:absolute; left:50%; bottom:0; width:calc(var(--gs) * .74); aspect-ratio:220/200; transform:translateX(-50%); padding:0; border:0; background:none; cursor:pointer; z-index:2; border-radius:20px}
+.gift svg{width:100%; height:100%; display:block; overflow:visible; transform-origin:50% 92%}
+.gift.wiggle svg{animation:wiggle .5s ease-in-out}
+@keyframes wiggle{0%,100%{transform:rotate(0)} 20%{transform:rotate(-7deg) translateY(-6px)} 40%{transform:rotate(6deg)} 60%{transform:rotate(-4deg)} 80%{transform:rotate(3deg)}}
+.gift .lid{transform-box:fill-box; transform-origin:50% 100%; transition:transform .8s cubic-bezier(.3,1.3,.6,1), opacity .45s ease .4s}
+.gift.open{cursor:default}
+.gift.open .lid{transform:translate(40px,-170px) rotate(26deg); opacity:0}
+.gift .sparkle{transform-box:fill-box; transform-origin:center; animation:twinkle 1.6s ease-in-out infinite}
+.gift .sparkle:nth-of-type(2n){animation-delay:-.8s}
+@keyframes twinkle{0%,100%{transform:scale(.5); opacity:.4} 50%{transform:scale(1.15); opacity:1}}
+.voucher{position:absolute; left:50%; top:2%; width:calc(var(--gs) * .98); z-index:1; opacity:0; transform:translate(-50%, 78%) scale(.45);
+  transition:transform 1s cubic-bezier(.2,1.25,.3,1), opacity .25s;
+  filter:drop-shadow(2.5px 0 0 var(--ink)) drop-shadow(-2.5px 0 0 var(--ink)) drop-shadow(0 2.5px 0 var(--ink)) drop-shadow(0 -2.5px 0 var(--ink)) drop-shadow(0 4px 0 var(--ink))}
+.voucher.up{opacity:1; transform:translate(-50%,0) scale(1)}
+.v-in{display:grid; grid-template-columns:minmax(0,1fr) 25%; min-height:calc(var(--gs) * .44); background:var(--butter); border-radius:14px;
+  -webkit-mask:radial-gradient(circle 11px at 75% 0, #0000 97%, #000) top/100% 51% no-repeat, radial-gradient(circle 11px at 75% 100%, #0000 97%, #000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle 11px at 75% 0, #0000 97%, #000) top/100% 51% no-repeat, radial-gradient(circle 11px at 75% 100%, #0000 97%, #000) bottom/100% 51% no-repeat}
+.v-main{padding:14px 12px 14px 18px; display:flex; flex-direction:column; justify-content:center; gap:6px; text-align:left; min-width:0}
+.v-eyebrow{font:600 11px/1 var(--display); letter-spacing:.16em; text-transform:uppercase; color:var(--cherry-dark)}
+.v-title{font:700 clamp(18px, 5.2vw, 23px)/1.1 var(--display); color:var(--ink); text-wrap:balance; overflow-wrap:anywhere}
+.v-note{font:400 clamp(17px, 4.6vw, 19px)/1.2 var(--hand); color:var(--ink-soft); overflow-wrap:anywhere}
+.v-stub{border-left:2.5px dashed rgba(74,36,32,.5); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; background:rgba(255,255,255,.4)}
+.v-stub .admit{writing-mode:vertical-rl; transform:rotate(180deg); font:700 13px/1 var(--display); letter-spacing:.16em; text-transform:uppercase}
+.v-stub .no{font:600 11px/1 var(--display); color:var(--ink-soft); font-variant-numeric:tabular-nums}
+
+/* scene 5: letter */
+.scene-letter .stack{height:100%; margin:0 auto; justify-content:center; gap:18px}
+.letter-wrap{position:relative; flex:0 1 auto; min-height:0; width:100%; display:flex; transform:rotate(-1deg); animation:letter-in .8s cubic-bezier(.2,1,.3,1) both}
+@keyframes letter-in{0%{transform:translateY(60px) rotate(4deg); opacity:0} 100%{transform:rotate(-1deg); opacity:1}}
+.tape{position:absolute; z-index:2; top:-13px; left:50%; width:112px; height:28px; margin-left:-56px; transform:rotate(-4deg); background:repeating-linear-gradient(45deg, rgba(134,200,255,.8) 0 8px, rgba(255,255,255,.7) 8px 16px); box-shadow:0 1px 2px rgba(74,36,32,.2)}
+.letter{--lh:31px; position:relative; flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; text-align:left; border:2.5px solid var(--ink); border-radius:14px; box-shadow:0 5px 0 var(--ink);
+  padding:30px 20px 24px 46px; font:400 21px/var(--lh) var(--hand); color:var(--ink); cursor:default;
+  background-color:var(--paper); background-image:linear-gradient(90deg, transparent 31px, rgba(240,56,107,.38) 31px 33px, transparent 33px), linear-gradient(transparent calc(var(--lh) - 1.5px), rgba(134,200,255,.6) calc(var(--lh) - 1.5px));
+  background-size:100% 100%, 100% var(--lh); background-origin:padding-box, content-box; background-attachment:local, local}
+.letter p{margin:0 0 var(--lh)}
+.letter .greet{font-size:24px}
+.letter .closing{margin:0}
+.letter .from{margin:0; font:700 25px/var(--lh) var(--display); color:var(--cherry); display:flex; align-items:center; gap:8px}
+.letter .from svg{width:22px; height:22px; flex:none}
+.w{opacity:0; transition:opacity .45s ease; transition-delay:calc(var(--i) * 38ms)}
+.letter.reveal .w{opacity:1}
+.letter.instant .w{transition-delay:0s}
+.end-actions{display:flex; flex-wrap:wrap; gap:12px; justify-content:center}
+
+/* personalize sheet (only offered to the card's owner) */
+.editor{position:fixed; inset:0; z-index:50; background:rgba(43,21,32,.5); display:flex; align-items:flex-end; justify-content:center; padding-top:calc(env(safe-area-inset-top,0px) + 20px)}
+.sheet{position:relative; display:flex; flex-direction:column; width:100%; max-width:560px; max-height:100%; background:var(--paper); border:2.5px solid var(--ink); border-bottom:0; border-radius:22px 22px 0 0; animation:sheet-in .35s cubic-bezier(.2,.9,.3,1)}
+@keyframes sheet-in{from{transform:translateY(40px); opacity:0}}
+.sheet-head{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:20px max(18px, env(safe-area-inset-right,0px)) 6px max(18px, env(safe-area-inset-left,0px))}
+.sheet-head h2{margin:0; font:700 24px/1.1 var(--display)}
+.sheet-head p{margin:6px 0 0; font:400 18px/1.25 var(--hand); color:var(--ink-soft)}
+.sheet-body{flex:1 1 auto; min-height:0; overflow-y:auto; padding:10px max(18px, env(safe-area-inset-right,0px)) 8px max(18px, env(safe-area-inset-left,0px))}
+.field{display:grid; gap:6px; margin-bottom:14px; text-align:left}
+.field label,.group-label{font:600 12px/1.2 var(--display); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft)}
+.field input,.field textarea{width:100%; font:400 19px/1.35 var(--hand); color:var(--ink); background:#fff; border:2px solid var(--ink); border-radius:12px; padding:9px 12px}
+.field textarea{min-height:180px; resize:vertical}
+.field input:focus-visible,.field textarea:focus-visible{outline-offset:1px}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:0 10px}
+.reasons{display:grid; gap:8px; margin:6px 0 14px}
+.reasons input{width:100%; font:400 19px/1.3 var(--hand); color:var(--ink); background:#fff; border:2px solid var(--ink); border-radius:12px; padding:8px 12px}
+.sheet-foot{flex:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:10px; border-top:2px dashed rgba(74,36,32,.25);
+  padding:12px max(18px, env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 14px) max(18px, env(safe-area-inset-left,0px))}
+.save-status{flex:1 1 100%; margin:0; min-height:1.25em; font:400 18px/1.25 var(--hand); color:var(--ink-soft); text-align:left}
+.save-status.bad{color:var(--cherry-dark)}
+.close-x{flex:none; width:40px; height:40px; border-radius:50%; border:2px solid var(--ink); background:#fff; display:grid; place-items:center; cursor:pointer; padding:0}
+.close-x svg{width:18px; height:18px}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion: reduce){
+  .envelope,.balloon .bob,.bunting .flag-g.now,.seal svg,.gift .sparkle{animation:none !important}
+  .candle .flame{animation:none !important}
+  .scene,.scene.on{transition-duration:.01s !important; transition-delay:0s !important}
+  .w{transition-delay:0s !important}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script type="application/json" id="card-data">
+{
+  "name": "Soul Sister",
+  "from": "Abhishek",
+  "signoff": "Love always,",
+  "message": "Happiest happiest birthday! 💛🌻\n\nYou have no idea how much I respect and adore you. You are my inspiration, baby.\n\nThe strength you have… I don't think anyone else has it. Can you believe it's been almost 11 years of our friendship? 🥰\n\nYou're my big sister! I wouldn't be where I am in life if you weren't there. You're my guide and my ride-or-die.\n\nLife turned us into a long-distance friendship, but it doesn't know how much love we have for each other. Nothing will ever break it.\n\nI'm here for you 24/7! I'll always have your back, in the bad times and the good.\n\nI'm superrrrrr proud of how far you've come in life. We all love you!\n\nI miss you sooo much, you have no idea. I love you.\n\nKeep shining, my babygirl. You deserve every happiness in the world, and you will find it!!!\n\nYou always ask why God is doing this to you. It's because He knows you'll handle it like no one else can.\n\nAlways remember: you are, and always will be, special 💛💛🥺😘✨",
+  "reasons": [
+    "Almost 11 years of us, and still counting!",
+    "Distance can't touch what we have.",
+    "You're my guide and my ride-or-die.",
+    "Your strength inspires me every day.",
+    "I'm here for you 24/7. Always.",
+    "My big sister, my soul sister."
+  ],
+  "giftTitle": "One long video call, any time you want",
+  "giftNote": "Valid 24/7. No distance too far."
+}
+</script>
+<script id="card-script">(() => {
+'use strict';
+/* Everything the card shows comes from the JSON block above this script.
+   The Personalize sheet (owner only) rewrites that block and republishes the page. */
+const HEAD_BITS = "\u003ctitle>Bestie Birthday Card\u003c/title>\n\u003cmeta name=\"claude:viewport-fit-sides\" content=\"cover\">\n\u003clink rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n\u003clink rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n\u003clink rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Patrick+Hand&display=swap\">\n";
+const SKELETON = ["\u003c!doctype html>\u003chtml>\u003chead>\u003cmeta charset=utf8>\u003cmeta name=viewport content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\u003cstyle>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}\u003c/style>\u003c/head>\u003cbody>\n", "\n\u003c/body>\u003c/html>"];
+const DEFAULTS = {"name": "Soul Sister", "from": "Abhishek", "signoff": "Love always,", "message": "Happiest happiest birthday! 💛🌻\n\nYou have no idea how much I respect and adore you. You are my inspiration, baby.\n\nThe strength you have… I don't think anyone else has it. Can you believe it's been almost 11 years of our friendship? 🥰\n\nYou're my big sister! I wouldn't be where I am in life if you weren't there. You're my guide and my ride-or-die.\n\nLife turned us into a long-distance friendship, but it doesn't know how much love we have for each other. Nothing will ever break it.\n\nI'm here for you 24/7! I'll always have your back, in the bad times and the good.\n\nI'm superrrrrr proud of how far you've come in life. We all love you!\n\nI miss you sooo much, you have no idea. I love you.\n\nKeep shining, my babygirl. You deserve every happiness in the world, and you will find it!!!\n\nYou always ask why God is doing this to you. It's because He knows you'll handle it like no one else can.\n\nAlways remember: you are, and always will be, special 💛💛🥺😘✨", "reasons": ["Almost 11 years of us, and still counting!", "Distance can't touch what we have.", "You're my guide and my ride-or-die.", "Your strength inspires me every day.", "I'm here for you 24/7. Always.", "My big sister, my soul sister."], "giftTitle": "One long video call, any time you want", "giftNote": "Valid 24/7. No distance too far."};
+const C = {ink:'#4A2420', paper:'#FFFBF4', cherry:'#F0386B', cherryDark:'#C41F4E', butter:'#FFD45C', butterDeep:'#F5B935', butterLight:'#FFE184',
+  mint:'#7DDCC0', mintLight:'#A6EBD6', sky:'#86C8FF', lilac:'#C6A8FF', tangerine:'#FF9F5A', pink:'#FF8FB3', pinkLight:'#FFB3CB', cream:'#FFF2E3', blush:'#FF8FB3'};
+const PARTY = [C.cherry, C.butter, C.mint, C.sky, C.lilac, C.tangerine, C.pink];
+const reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const rand = (a, b) => a + Math.random() * (b - a);
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
+function normalize(d) {
+  d = d && typeof d === 'object' ? d : {};
+  const s = (v, def, max) => (typeof v === 'string' && v.trim()) ? v.trim().slice(0, max) : def;
+  return {
+    name: s(d.name, DEFAULTS.name, 40),
+    from: s(d.from, DEFAULTS.from, 40),
+    signoff: s(d.signoff, DEFAULTS.signoff, 40),
+    message: s(d.message, DEFAULTS.message, 2000),
+    giftTitle: s(d.giftTitle, DEFAULTS.giftTitle, 60),
+    giftNote: s(d.giftNote, DEFAULTS.giftNote, 90),
+    reasons: DEFAULTS.reasons.map((r, i) => s(Array.isArray(d.reasons) ? d.reasons[i] : '', r, 80))
+  };
+}
+function readData() {
+  try { return normalize(JSON.parse(document.getElementById('card-data').textContent)); }
+  catch (e) { return normalize(DEFAULTS); }
+}
+
+/* ---------- sound: tiny Web Audio synth, starts on the first tap ---------- */
+const sound = (() => {
+  let ac = null, master = null, on = true, noiseBuf = null, songTimer = 0;
+  function ctx() {
+    if (!on) return null;
+    try {
+      if (!ac) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        ac = new AC(); master = ac.createGain(); master.gain.value = .55; master.connect(ac.destination);
+      }
+      if (ac.state === 'suspended') ac.resume();
+    } catch (e) { return null; }
+    return ac;
+  }
+  function tone(f, t, dur, type = 'sine', gain = .2, attack = .006) {
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + attack); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .05);
+    return o;
+  }
+  function noise(t, dur, freq, q, gain, kind = 'bandpass', sweepTo) {
+    if (!noiseBuf) {
+      noiseBuf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate);
+      const ch = noiseBuf.getChannelData(0); for (let i = 0; i < ch.length; i++) ch[i] = Math.random() * 2 - 1;
+    }
+    const src = ac.createBufferSource(), bf = ac.createBiquadFilter(), g = ac.createGain();
+    src.buffer = noiseBuf; bf.type = kind; bf.frequency.setValueAtTime(freq, t); bf.Q.value = q;
+    if (sweepTo) bf.frequency.exponentialRampToValueAtTime(sweepTo, t + dur);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + .01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(bf); bf.connect(g); g.connect(master); src.start(t); src.stop(t + dur + .05);
+  }
+  function bell(f, t, dur) { tone(f, t, dur, 'sine', .2); tone(f * 2, t, dur * .55, 'sine', .05); tone(f * 3.01, t, dur * .25, 'triangle', .015); }
+  const N = {G4:392, A4:440, B4:493.88, C5:523.25, D5:587.33, E5:659.25, F5:698.46, G5:783.99, C6:1046.5, E6:1318.5, G6:1568, C7:2093};
+  const SONG = [['G4',.75],['G4',.25],['A4',1],['G4',1],['C5',1],['B4',2],['G4',.75],['G4',.25],['A4',1],['G4',1],['D5',1],['C5',2],
+    ['G4',.75],['G4',.25],['G5',1],['E5',1],['C5',1],['B4',1],['A4',2],['F5',.75],['F5',.25],['E5',1],['C5',1],['D5',1],['C5',3]];
+  return {
+    unlock() { ctx(); },
+    get on() { return on; },
+    toggle() { on = !on; if (!on) { clearTimeout(songTimer); if (master && ac) master.gain.setTargetAtTime(0, ac.currentTime, .05); } else { ctx(); if (master && ac) master.gain.setTargetAtTime(.55, ac.currentTime, .05); } return on; },
+    pop() { if (!ctx()) return; const t = ac.currentTime; noise(t, .12, 1500, .6, .55); tone(180, t, .14, 'triangle', .18); },
+    bloop() { if (!ctx()) return; const t = ac.currentTime; const o = tone(640, t, .28, 'sine', .25); o.frequency.exponentialRampToValueAtTime(190, t + .25); },
+    blow() { if (!ctx()) return; noise(ac.currentTime, .45, 1800, .5, .35, 'lowpass', 300); },
+    fwip() { if (!ctx()) return; const t = ac.currentTime; noise(t, .16, 3000, .9, .12, 'bandpass', 900); tone(880, t, .12, 'sine', .04); },
+    tick() { if (!ctx()) return; const t = ac.currentTime; tone(1250, t, .08, 'triangle', .1); tone(1660, t + .05, .08, 'triangle', .07); },
+    chime() { if (!ctx()) return; const t = ac.currentTime; ['C6','E6','G6','C7'].forEach((n, i) => bell(N[n], t + i * .09, 1.1)); },
+    whoosh() { if (!ctx()) return; noise(ac.currentTime, .5, 400, .7, .18, 'bandpass', 2400); },
+    song() {
+      if (!ctx()) return; clearTimeout(songTimer);
+      const beat = .42; let t = ac.currentTime + .1;
+      SONG.forEach(([n, b]) => { bell(N[n], t, Math.max(.6, b * beat * 1.6)); t += b * beat; });
+    }
+  };
+})();
+
+/* ---------- effects canvas: confetti, balloon shards, sparkles, fireworks ---------- */
+const fx = (() => {
+  let cv, cx, W = 0, H = 0, parts = [], running = false, last = 0;
+  function init() {
+    cv = document.createElement('canvas'); cv.id = 'fx'; cv.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cv); cx = cv.getContext('2d'); resize();
+  }
+  function resize() {
+    if (!cv) return;
+    const dpr = Math.min(2, window.devicePixelRatio || 1); W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function add(p) {
+    parts.push(Object.assign({rot: rand(0, 6.28), vr: rand(-8, 8), tilt: rand(0, 6.28), vt: rand(4, 12), g: 520, drag: 1.9, life: rand(3, 5), fade: .6, size: rand(6, 10), shape: 'rect', alpha: 1}, p));
+    if (!running) { running = true; last = performance.now(); requestAnimationFrame(tick); }
+  }
+  function tick(now) {
+    const dt = Math.min(.034, (now - last) / 1000); last = now;
+    cx.clearRect(0, 0, W, H);
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i];
+      p.life -= dt;
+      if (p.life <= 0 || p.y > H + 60) { parts.splice(i, 1); continue; }
+      const k = Math.max(0, 1 - p.drag * dt);
+      p.vx *= k; p.vy = p.vy * k + p.g * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt; p.tilt += p.vt * dt;
+      if (p.trail) p.trail.push([p.x, p.y]), p.trail.length > 6 && p.trail.shift();
+      draw(p);
+    }
+    if (parts.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0, 0, W, H); }
+  }
+  function draw(p) {
+    const a = Math.min(1, p.life / p.fade) * p.alpha;
+    cx.save(); cx.globalAlpha = a; cx.fillStyle = p.color; cx.strokeStyle = p.color;
+    if (p.shape === 'spark') {
+      if (p.trail && p.trail.length > 1) { cx.lineWidth = p.size * .7; cx.lineCap = 'round'; cx.beginPath(); cx.moveTo(p.trail[0][0], p.trail[0][1]); for (const q of p.trail) cx.lineTo(q[0], q[1]); cx.globalAlpha = a * .45; cx.stroke(); cx.globalAlpha = a; }
+      cx.beginPath(); cx.arc(p.x, p.y, p.size, 0, 6.283); cx.fill(); cx.restore(); return;
+    }
+    cx.translate(p.x, p.y); cx.rotate(p.rot);
+    const s = p.size;
+    if (p.shape === 'rect') { cx.scale(1, Math.cos(p.tilt)); cx.fillRect(-s / 2, -s * .32, s, s * .64); }
+    else if (p.shape === 'circle') { cx.scale(1, .6 + .4 * Math.abs(Math.cos(p.tilt))); cx.beginPath(); cx.arc(0, 0, s * .42, 0, 6.283); cx.fill(); }
+    else if (p.shape === 'sprinkle') { cx.lineCap = 'round'; cx.lineWidth = s * .42; cx.beginPath(); cx.moveTo(-s * .6, 0); cx.lineTo(s * .6, 0); cx.stroke(); }
+    else if (p.shape === 'star') {
+      cx.beginPath();
+      for (let i = 0; i < 8; i++) { const r = i % 2 ? s * .22 : s * .7, an = i * Math.PI / 4; cx.lineTo(Math.cos(an) * r, Math.sin(an) * r); }
+      cx.closePath(); cx.fill();
+    }
+    cx.restore();
+  }
+  const scale = n => Math.round(n * (reduced ? .35 : 1));
+  return {
+    init, resize,
+    burst(x, y, n, o = {}) {
+      const {angle = -Math.PI / 2, spread = Math.PI * 2, speed = 520, colors = PARTY, shapes = ['rect', 'rect', 'circle', 'sprinkle'], g = 520, drag = 1.9, life = [3, 5], size = [6, 11]} = o;
+      for (let i = 0; i < scale(n); i++) {
+        const an = angle + rand(-spread / 2, spread / 2), sp = speed * rand(.45, 1);
+        add({x, y, vx: Math.cos(an) * sp, vy: Math.sin(an) * sp, color: pick(colors), shape: pick(shapes), g, drag, life: rand(life[0], life[1]), size: rand(size[0], size[1])});
+      }
+    },
+    cannons() {
+      this.burst(-10, H * .95, 110, {angle: -Math.PI * .32, spread: .9, speed: 1250});
+      this.burst(W + 10, H * .95, 110, {angle: -Math.PI * .68, spread: .9, speed: 1250});
+    },
+    rain(n = 90) { for (let i = 0; i < scale(n); i++) add({x: rand(0, W), y: rand(-H * .4, -10), vx: rand(-40, 40), vy: rand(40, 140), color: pick(PARTY), shape: pick(['rect', 'circle', 'sprinkle']), life: rand(4, 6.5), size: rand(6, 11)}); },
+    pop(x, y, color) { this.burst(x, y, 22, {colors: [color, color, '#ffffff'], shapes: ['rect', 'sprinkle'], speed: 460, g: 900, drag: 3.2, life: [.7, 1.2], size: [5, 9]}); },
+    sparkle(x, y, n = 18) { this.burst(x, y, n, {colors: [C.butter, '#ffffff', C.pink, C.sky], shapes: ['star'], speed: 300, g: 120, drag: 2.6, life: [.8, 1.4], size: [8, 14]}); },
+    firework(x, y) {
+      const col = pick(PARTY), col2 = pick(PARTY), n = scale(44);
+      for (let i = 0; i < n; i++) {
+        const an = (i / n) * Math.PI * 2 + rand(-.05, .05), sp = rand(200, 300);
+        add({x, y, vx: Math.cos(an) * sp, vy: Math.sin(an) * sp, color: i % 3 ? col : col2, shape: 'spark', g: 240, drag: 1.5, life: rand(1.1, 1.6), fade: .7, size: rand(2.2, 3.2), trail: []});
+      }
+    },
+    show(fireworks = 4) {
+      if (reduced) { this.rain(60); return; }
+      for (let i = 0; i < fireworks; i++) setTimeout(() => this.firework(rand(W * .18, W * .82), rand(H * .14, H * .42)), i * 420);
+    },
+    get W() { return W; }, get H() { return H; }
+  };
+})();
+
+/* ---------- static sprinkles on the background ---------- */
+function drawSprinkles() {
+  let cv = document.getElementById('bg');
+  if (!cv) { cv = document.createElement('canvas'); cv.id = 'bg'; cv.setAttribute('aria-hidden', 'true'); document.body.prepend(cv); }
+  const dpr = Math.min(2, window.devicePixelRatio || 1), w = innerWidth, h = innerHeight;
+  cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+  const c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h); c.lineCap = 'round';
+  const cols = [C.cherry, C.butter, C.mint, C.sky, C.lilac, C.tangerine, '#ffffff'];
+  const n = Math.round(w * h / 5200);
+  for (let i = 0; i < n; i++) {
+    const x = Math.random() * w, y = Math.random() * h, a = Math.random() * Math.PI, l = rand(4.5, 7);
+    c.globalAlpha = rand(.55, .9); c.strokeStyle = pick(cols); c.lineWidth = rand(3.2, 4.2);
+    c.beginPath(); c.moveTo(x - Math.cos(a) * l, y - Math.sin(a) * l); c.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); c.stroke();
+  }
+}
+
+/* ---------- markup: icons and illustrations (sticker style, cocoa outlines) ---------- */
+const HEART = 'M12 20.5C6 16.5 2.5 13 2.5 9 2.5 6.2 4.6 4 7.2 4c2 0 3.7 1.2 4.8 3 1.1-1.8 2.8-3 4.8-3 2.6 0 4.7 2.2 4.7 5 0 4-3.5 7.5-9.5 11.5z';
+const K3 = `stroke="${C.ink}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"`;
+const ICON = {
+  soundOn: `<svg viewBox="0 0 24 24" fill="none" stroke="${C.ink}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="${C.butter}"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>`,
+  soundOff: `<svg viewBox="0 0 24 24" fill="none" stroke="${C.ink}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="${C.paper}"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>`,
+  pencil: `<svg viewBox="0 0 24 24" fill="none" stroke="${C.ink}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 0l.5.5a2.1 2.1 0 0 1 0 3L8.5 19z" fill="${C.paper}"/><path d="M13.5 7l3.5 3.5"/></svg>`,
+  arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>`,
+  replay: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/></svg>`,
+  sparkle: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5Q13 11 21.5 12 13 13 12 21.5 11 13 2.5 12 11 11 12 2.5z" fill="${C.butter}" stroke="${C.ink}" stroke-width="1.8" stroke-linejoin="round"/></svg>`,
+  close: `<svg viewBox="0 0 24 24" fill="none" stroke="${C.ink}" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>`,
+  heart: fill => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${HEART}" fill="${fill}" stroke="${C.ink}" stroke-width="2" stroke-linejoin="round"/></svg>`
+};
+const FLAGS = [{x:25.2,y:10.3,a:10.3,c:C.cherry},{x:67.6,y:16.1,a:5.2,c:C.butter},{x:110,y:18,a:0,c:C.mint},{x:152.4,y:16.1,a:-5.2,c:C.sky},{x:194.8,y:10.3,a:-10.3,c:C.lilac}];
+function buntingSvg() {
+  const f = v => v.toFixed(1);
+  return `<svg class="bunting" viewBox="0 0 220 46" aria-hidden="true"><path class="string" d="M4 6Q110 30 216 6"/>` +
+    FLAGS.map(g => `<g class="flag-g" style="--a:${g.a}deg"><path class="flag" style="--fc:${g.c}" d="M${f(g.x - 12)} ${f(g.y - 1)}L${f(g.x + 12)} ${f(g.y - 1)}L${f(g.x)} ${f(g.y + 22)}Z"/></g>`).join('') + `</svg>`;
+}
+function topbarHtml() {
+  return `<div class="topbar">
+    <button class="edit-btn" id="editBtn" type="button" hidden>${ICON.pencil}<span>Personalize</span></button>
+    ${buntingSvg()}
+    <button class="icon-btn" id="soundBtn" type="button" aria-pressed="${sound.on}" aria-label="Sound">${sound.on ? ICON.soundOn : ICON.soundOff}</button>
+    <p class="sr-only" id="progressText" aria-live="polite"></p>
+  </div>`;
+}
+function sealSvg() {
+  let d = '';
+  for (let i = 0; i <= 120; i++) { const t = i / 120 * Math.PI * 2, r = 26 + 2.4 * Math.cos(t * 13); d += (i ? 'L' : 'M') + (Math.cos(t) * r).toFixed(2) + ' ' + (Math.sin(t) * r).toFixed(2); }
+  return `<svg viewBox="-32 -32 64 64" aria-hidden="true"><path d="${d}Z" fill="${C.cherry}" stroke="${C.ink}" stroke-width="2.6" stroke-linejoin="round"/>
+    <circle r="18" fill="none" stroke="${C.cherryDark}" stroke-width="2.2"/>
+    <path transform="translate(-10.8 -11.6) scale(.9)" d="${HEART}" fill="${C.pinkLight}" stroke="${C.cherryDark}" stroke-width="1.7" stroke-linejoin="round"/>
+    <path d="M-15 -12A19 19 0 0 1-4-18.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round"/></svg>`;
+}
+function stampSvg() {
+  const w = 52, h = 62, r = 2.2, s = 6.5, f = v => v.toFixed(1);
+  let d = 'M0 0';
+  for (let x = s; x < w - 1; x += s) d += `L${f(x - r)} 0A${r} ${r} 0 0 0 ${f(x + r)} 0`;
+  d += `L${w} 0`;
+  for (let y = s; y < h - 1; y += s) d += `L${w} ${f(y - r)}A${r} ${r} 0 0 0 ${w} ${f(y + r)}`;
+  d += `L${w} ${h}`;
+  for (let x = w - s; x > 1; x -= s) d += `L${f(x + r)} ${h}A${r} ${r} 0 0 0 ${f(x - r)} ${h}`;
+  d += `L0 ${h}`;
+  for (let y = h - s; y > 1; y -= s) d += `L0 ${f(y + r)}A${r} ${r} 0 0 0 0 ${f(y - r)}`;
+  return `<svg viewBox="-1 -1 54 64" aria-hidden="true"><path d="${d}Z" fill="${C.paper}" stroke="rgba(74,36,32,.45)" stroke-width="1"/>
+    <rect x="5" y="5" width="42" height="52" rx="2" fill="${C.mint}" stroke="${C.ink}" stroke-width="1.4"/>
+    <g stroke="${C.ink}" stroke-width="1.2" stroke-linejoin="round"><rect x="15" y="29" width="22" height="13" rx="2" fill="${C.pink}"/><rect x="19" y="21" width="14" height="9" rx="2" fill="${C.paper}"/><rect x="25" y="14.5" width="2" height="6.5" fill="${C.butter}" stroke-width=".8"/><path d="M12 42.5H40" stroke-linecap="round"/></g>
+    <ellipse cx="26" cy="11.6" rx="1.8" ry="2.7" fill="${C.tangerine}"/>
+    <text x="26" y="52.5" text-anchor="middle" font-size="6.6" fill="${C.ink}">1 HUG</text></svg>`;
+}
+function postmarkSvg() {
+  const now = new Date(), day = now.getDate(), mon = now.toLocaleString('en', {month: 'short'}).toUpperCase();
+  return `<svg viewBox="0 0 104 52" aria-hidden="true"><circle cx="26" cy="26" r="23" fill="none" stroke="currentColor" stroke-width="2.4"/>
+    <circle cx="26" cy="26" r="17" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 2.5"/>
+    <text x="26" y="28" text-anchor="middle" font-size="13" fill="currentColor">${day}</text><text x="26" y="38.5" text-anchor="middle" font-size="7.5" fill="currentColor">${esc(mon)}</text>
+    ${[16, 26, 36].map(y => `<path d="M54 ${y}q6-5 12 0t12 0t12 0t12 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`).join('')}</svg>`;
+}
+function drip(cx, top, rx, ry, band, drips) {
+  const x0 = cx - rx, x1 = cx + rx, w = 7, f = v => v.toFixed(1);
+  const yb = x => top + ry * Math.sqrt(Math.max(0, 1 - ((x - cx) / rx) ** 2)) + band;
+  let d = `M${f(x0)} ${f(top)}A${rx} ${ry} 0 0 1 ${f(x1)} ${f(top)}L${f(x1)} ${f(yb(x1))}`, x = x1;
+  for (const [dx, L] of [...drips].sort((a, b) => b[0] - a[0])) {
+    for (let t = x - 8; t > dx + w + 3; t -= 8) d += `L${f(t)} ${f(yb(t))}`;
+    const y = yb(dx);
+    d += `L${f(dx + w + 3)} ${f(y)}Q${f(dx + w)} ${f(y)} ${f(dx + w)} ${f(y + 4)}L${f(dx + w)} ${f(y + L - w)}A${w} ${w} 0 0 1 ${f(dx - w)} ${f(y + L - w)}L${f(dx - w)} ${f(y + 4)}Q${f(dx - w)} ${f(y)} ${f(dx - w - 3)} ${f(y)}`;
+    x = dx - w - 3;
+  }
+  for (let t = x - 8; t > x0; t -= 8) d += `L${f(t)} ${f(yb(t))}`;
+  return d + `L${f(x0)} ${f(yb(x0))}Z`;
+}
+function cakeSvg() {
+  const spr = [[54,240,30,C.sky],[76,232,-40,C.butter],[64,254,70,C.lilac],[92,246,10,C.mint],[100,262,-20,C.cherry],[124,262,35,C.sky],[176,262,-35,C.butter],
+    [206,242,-30,C.mint],[226,232,40,C.cherry],[244,246,-60,C.sky],[214,258,20,C.lilac],[232,255,-10,C.butter]];
+  return `<svg class="cake-svg" viewBox="0 0 300 320" aria-hidden="true">
+    <ellipse cx="150" cy="306" rx="104" ry="8" fill="rgba(74,36,32,.14)"/>
+    <path d="M122 280L178 280L188 300Q150 310 112 300Z" fill="${C.paper}" ${K3}/>
+    <ellipse cx="150" cy="274" rx="132" ry="16" fill="${C.paper}" ${K3}/>
+    <path d="M46 182L46 258Q150 286 254 258L254 182Z" fill="${C.cream}" ${K3}/>
+    ${spr.map(([x, y, a, c]) => `<path d="M${x - 4} ${y}L${x + 4} ${y}" transform="rotate(${a} ${x} ${y})" stroke="${c}" stroke-width="4.2" stroke-linecap="round"/>`).join('')}
+    <path d="${drip(150, 182, 104, 13, 10, [[64,26],[96,18],[128,12],[172,14],[206,24],[238,16]])}" fill="${C.pink}" ${K3}/>
+    <path d="M78 122L78 186Q150 206 222 186L222 122Z" fill="${C.pinkLight}" ${K3}/>
+    ${[[96,172],[120,180],[180,180],[204,172],[150,184],[108,158],[192,158]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.2" fill="#fff"/>`).join('')}
+    <path d="${drip(150, 122, 72, 10, 9, [[92,18],[116,12],[142,22],[168,14],[198,20]])}" fill="${C.paper}" ${K3}/>
+    <ellipse cx="106" cy="247" rx="9" ry="5" fill="${C.blush}" opacity=".8"/><ellipse cx="194" cy="247" rx="9" ry="5" fill="${C.blush}" opacity=".8"/>
+    <g class="wish"><path d="M118 232q8 7 16 0M166 232q8 7 16 0M143 243q7 6 14 0" fill="none" ${K3}/></g>
+    <g class="yay"><circle cx="126" cy="234" r="6.5" fill="${C.ink}"/><circle cx="174" cy="234" r="6.5" fill="${C.ink}"/>
+      <circle cx="128.4" cy="231.6" r="2.2" fill="#fff"/><circle cx="176.4" cy="231.6" r="2.2" fill="#fff"/>
+      <path d="M140 241q10 14 20 0z" fill="${C.cherryDark}" ${K3}/></g>
+  </svg>`;
+}
+const CANDLES = [{x:104,y:121,h:44,c:C.mint,d:1.05},{x:127,y:125,h:52,c:C.sky,d:1.3},{x:150,y:127,h:46,c:C.butter,d:.95},{x:173,y:125,h:54,c:C.lilac,d:1.2},{x:196,y:121,h:42,c:C.tangerine,d:1.1}];
+function candlesHtml() {
+  return CANDLES.map((c, i) => `<button class="candle unlit" type="button" aria-label="Blow out candle ${i + 1}" style="--x:${c.x};--y:${c.y};--h:${c.h};--c:${c.c};--d:${c.d}s"><span class="stick"></span><span class="wick"></span><span class="flame"></span><span class="smoke"></span></button>`).join('');
+}
+function balloonSvg(col) {
+  return `<svg viewBox="0 0 100 170" aria-hidden="true">
+    <path d="M50 122C42 134 60 144 50 156S46 166 52 170" fill="none" stroke="${C.ink}" stroke-width="2" stroke-linecap="round"/>
+    <path d="M50 6C78 6 94 30 94 56C94 88 70 110 50 114C30 110 6 88 6 56C6 30 22 6 50 6Z" fill="${col}" ${K3}/>
+    <path d="M44 122L50 113L56 122Z" fill="${col}" stroke="${C.ink}" stroke-width="2.6" stroke-linejoin="round"/>
+    <ellipse cx="30" cy="38" rx="7" ry="13" transform="rotate(24 30 38)" fill="#fff" opacity=".55"/><circle cx="38" cy="62" r="3" fill="#fff" opacity=".45"/></svg>`;
+}
+function giftSvg() {
+  const star = (x, y, s) => `<path class="sparkle" d="M${x} ${y - s}Q${x} ${y} ${x + s} ${y}Q${x} ${y} ${x} ${y + s}Q${x} ${y} ${x - s} ${y}Q${x} ${y} ${x} ${y - s}Z" fill="${C.butter}" stroke="${C.ink}" stroke-width="1.6" stroke-linejoin="round"/>`;
+  return `<svg viewBox="0 0 220 200" aria-hidden="true">
+    <ellipse cx="110" cy="190" rx="84" ry="8" fill="rgba(74,36,32,.15)"/>
+    <rect x="34" y="94" width="152" height="92" rx="10" fill="${C.mint}" ${K3}/>
+    ${[[54,118],[72,164],[160,116],[174,162],[56,146],[166,140]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5" fill="#fff" opacity=".7"/>`).join('')}
+    <path d="M37 97H183V107H37Z" fill="#4FA88E"/>
+    <rect x="98" y="94" width="24" height="92" fill="${C.cherry}" ${K3}/>
+    <g class="lid">
+      <rect x="26" y="72" width="168" height="30" rx="8" fill="${C.mintLight}" ${K3}/>
+      <rect x="98" y="72" width="24" height="30" fill="${C.cherry}" ${K3}/>
+      <path d="M108 70C92 36 56 46 74 66C82 74 98 73 108 70Z" fill="${C.cherry}" ${K3}/>
+      <path d="M112 70C128 36 164 46 146 66C138 74 122 73 112 70Z" fill="${C.cherry}" ${K3}/>
+      <path d="M100 64C92 56 84 54 81 59M120 64C128 56 136 54 139 59" fill="none" stroke="${C.cherryDark}" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="110" cy="69" rx="10" ry="9" fill="${C.cherryDark}" ${K3}/>
+    </g>
+    ${star(28, 54, 9)}${star(198, 40, 7)}${star(196, 128, 6)}
+  </svg>`;
+}
+
+/* ---------- scenes ---------- */
+const BALLOON_COLS = [C.cherry, C.sky, C.butter, C.mint, C.lilac, C.tangerine];
+const LABELS = ['Envelope', 'Birthday cake', 'Balloons', 'Gift', 'Letter'];
+const BUILD = [
+  d => `<div class="stack">
+    <p class="eyebrow">Special delivery</p>
+    <h1 class="title" tabindex="-1">A little something for you</h1>
+    <div class="env-wrap"><button class="envelope" id="envelope" type="button" aria-label="Open the envelope for ${esc(d.name)}">
+      <svg class="env-back" viewBox="0 0 300 200" aria-hidden="true"><rect x="2" y="2" width="296" height="196" rx="12" fill="${C.butterDeep}" ${K3}/></svg>
+      <span class="env-letter" aria-hidden="true"><span class="peek">Happy<br>Birthday!</span></span>
+      <svg class="env-pocket" viewBox="0 0 300 200" aria-hidden="true"><path d="M4 12L147 108L4 196Z" fill="${C.butter}" ${K3}/><path d="M296 12L153 108L296 196Z" fill="${C.butter}" ${K3}/><path d="M4 197L138 101Q150 92 162 101L296 197Z" fill="${C.butterLight}" ${K3}/></svg>
+      <svg class="env-flap" viewBox="0 0 300 200" aria-hidden="true"><path d="M3 5L297 5L163 115Q150 126 137 115Z" fill="#FFCB3D" ${K3}/></svg>
+      <span class="seal" aria-hidden="true">${sealSvg()}</span>
+      <span class="env-to" aria-hidden="true"><small>For</small><b>${esc(d.name)}</b></span>
+      <span class="stamp" aria-hidden="true">${stampSvg()}</span>
+      <span class="postmark" aria-hidden="true">${postmarkSvg()}</span>
+    </button></div>
+    <p class="hint" id="envHint">Tap the heart to open</p></div>`,
+  () => `<div class="stack">
+    <h2 class="title" id="cakeTitle" tabindex="-1">Make a wish…</h2>
+    <p class="hint" id="cakeHint">…then blow out the candles. Tap or swipe across the flames.</p>
+    <div class="cake-wrap" id="cakeWrap"><div class="cake-glow"></div>${cakeSvg()}${candlesHtml()}</div>
+    <button class="btn reveal-later" id="cakeNext" type="button">Next surprise ${ICON.arrow}</button></div>`,
+  d => `<div class="stack">
+    <h2 class="title" tabindex="-1">Pop the balloons</h2>
+    <p class="hint">Each one is hiding a little note for you</p>
+    <span class="pill" id="popCount" aria-live="polite">0 of 6 popped</span>
+    <div class="balloon-grid">${d.reasons.map((r, i) => `<div class="cell" style="--c:${BALLOON_COLS[i]};--r:${[-4, 3, -2, 4, -3, 2][i]}deg">
+      <button class="balloon" type="button" aria-label="Pop balloon ${i + 1} of 6" style="--delay:${(i * .12).toFixed(2)}s;--dur:${(3 + (i % 3) * .6).toFixed(1)}s;--neg:-${(i * .7).toFixed(1)}s"><span class="bob">${balloonSvg(BALLOON_COLS[i])}</span></button>
+      <p class="note${r.length > 52 ? ' long' : ''}" hidden>${esc(r)}</p></div>`).join('')}</div>
+    <button class="btn reveal-later" id="balloonNext" type="button">Next surprise ${ICON.arrow}</button></div>`,
+  d => `<div class="stack">
+    <h2 class="title" tabindex="-1">One more thing…</h2>
+    <p class="hint" id="giftHint" aria-live="polite">Tap the box to unwrap it</p>
+    <div class="gift-stage">
+      <div class="voucher" id="voucher" aria-hidden="true"><div class="v-in">
+        <div class="v-main"><span class="v-eyebrow">Birthday voucher</span><strong class="v-title">${esc(d.giftTitle)}</strong><span class="v-note">${esc(d.giftNote)}</span></div>
+        <div class="v-stub"><span class="admit">Admit one</span><span class="no">No. 001</span></div></div></div>
+      <button class="gift" id="gift" type="button" aria-label="Unwrap the gift">${giftSvg()}</button>
+    </div>
+    <button class="btn reveal-later" id="giftNext" type="button">Read my letter ${ICON.arrow}</button></div>`,
+  d => {
+    let i = 0;
+    const words = t => t.split(/(\s+)/).map(p => /^\s+$/.test(p) ? ' ' : (p ? `<span class="w" style="--i:${i++}">${esc(p)}</span>` : '')).join('');
+    const paras = d.message.split(/\n\s*\n/).map(p => `<p>${p.split('\n').map(words).join('<br>')}</p>`).join('');
+    return `<div class="stack">
+      <div class="letter-wrap"><span class="tape" aria-hidden="true"></span>
+        <article class="letter" id="letter" tabindex="0" aria-label="Birthday letter for ${esc(d.name)}">
+          <p class="greet">Dear ${esc(d.name)},</p>${paras}
+          <p class="closing w" style="--i:${i + 3}">${esc(d.signoff)}</p>
+          <p class="from w" style="--i:${i + 6}"><span>${esc(d.from)}</span>${ICON.heart(C.cherry)}</p>
+        </article></div>
+      <div class="end-actions reveal-later" id="endActions">
+        <button class="btn" id="againBtn" type="button">${ICON.sparkle} Celebrate again</button>
+        <button class="btn quiet" id="restartBtn" type="button">${ICON.replay} Start over</button>
+      </div></div>`;
+  }
+];
+
+/* ---------- flow ---------- */
+let DATA = readData();
+let current = -1, canEditCard = false, sections = [];
+
+function lettersHtml(text) {
+  let i = 0;
+  return text.split(' ').map(w => `<span class="word">${Array.from(w).map(ch => `<span class="ch" style="--i:${i++}">${esc(ch)}</span>`).join('')}</span>`).join(' ');
+}
+function setLit(wrap, frac) { wrap.style.setProperty('--lit', frac.toFixed(2)); wrap.style.setProperty('--bright', (.34 + .5 * frac).toFixed(2)); }
+function updateBunting(n) {
+  $$('.bunting .flag-g').forEach((g, i) => { g.classList.toggle('now', i === n); g.firstElementChild.classList.toggle('on', i <= n); });
+  const p = $('#progressText'); if (p) p.textContent = `Part ${n + 1} of 5: ${LABELS[n]}`;
+}
+function go(n, first) {
+  const prev = current; current = n;
+  const sec = sections[n];
+  sec.innerHTML = BUILD[n](DATA);
+  ENTER[n](sec);
+  sections.forEach((s, i) => { const on = i === n; s.classList.toggle('on', on); s.inert = !on; s.setAttribute('aria-hidden', on ? 'false' : 'true'); });
+  if (prev >= 0 && prev !== n) { const old = sections[prev]; setTimeout(() => { if (current !== prev) old.innerHTML = ''; }, 800); }
+  updateBunting(n);
+  if (!first) { const t = $('.title', sec); if (t) setTimeout(() => { if (current === n) t.focus({preventScroll: true}); }, 700); }
+}
+
+const ENTER = [
+  sec => { /* envelope */
+    document.body.classList.remove('dark');
+    const env = $('#envelope', sec);
+    env.addEventListener('click', async () => {
+      if (env.classList.contains('opening')) return;
+      sound.unlock(); sound.bloop();
+      env.classList.add('opening'); $('#envHint', sec).style.opacity = '0';
+      await wait(320); env.classList.add('flap-open'); sound.whoosh();
+      await wait(560); env.classList.add('flap-behind', 'letter-out');
+      await wait(700);
+      const r = env.getBoundingClientRect();
+      fx.sparkle(r.left + r.width / 2, r.top, 16);
+      fx.burst(r.left + r.width / 2, r.top + r.height * .15, 46, {speed: 650, spread: 1.7});
+      sound.chime();
+      await wait(1150); if (current === 0) go(1);
+    });
+  },
+  sec => { /* cake */
+    const wrap = $('#cakeWrap', sec), candles = $$('.candle', wrap);
+    let done = false, down = false;
+    setLit(wrap, 1);
+    document.body.classList.add('dark');
+    candles.forEach((c, i) => setTimeout(() => { if (current === 1 && sections[1].contains(c)) { c.classList.remove('unlit'); sound.fwip(); } }, 1100 + i * 260));
+    const blow = c => {
+      if (done || c.classList.contains('unlit') || c.classList.contains('out')) return;
+      c.classList.add('out'); c.setAttribute('aria-label', 'Candle blown out'); sound.blow();
+      const left = candles.filter(x => !x.classList.contains('out')).length;
+      setLit(wrap, left / candles.length);
+      if (left === 0) celebrate();
+    };
+    const at = (x, y) => { const el = document.elementFromPoint(x, y), c = el && el.closest ? el.closest('.candle') : null; if (c && wrap.contains(c)) blow(c); };
+    wrap.addEventListener('pointerdown', e => { down = true; at(e.clientX, e.clientY); });
+    wrap.addEventListener('pointermove', e => { if (down || e.pointerType === 'touch') at(e.clientX, e.clientY); });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => wrap.addEventListener(t, () => { down = false; }));
+    candles.forEach(c => c.addEventListener('click', () => blow(c)));
+    async function celebrate() {
+      done = true;
+      const hint = $('#cakeHint', sec), title = $('#cakeTitle', sec);
+      hint.style.opacity = '0';
+      await wait(950); if (current !== 1) return;
+      const b = document.body;
+      b.classList.add('instant'); b.classList.remove('dark'); await wait(70); b.classList.add('dark'); await wait(110); b.classList.remove('dark');
+      await wait(30); b.classList.remove('instant');
+      wrap.classList.add('happy');
+      fx.cannons(); sound.song();
+      const text = `Happy Birthday, ${DATA.name}!`;
+      title.classList.toggle('small', DATA.name.length > 9);
+      title.setAttribute('aria-label', text); title.innerHTML = lettersHtml(text);
+      hint.textContent = 'Lights on! Hope your wish comes true.'; hint.style.opacity = '1';
+      await wait(1500); fx.rain(60);
+      $('#cakeNext', sec).classList.add('show');
+    }
+    $('#cakeNext', sec).addEventListener('click', () => go(2));
+  },
+  sec => { /* balloons */
+    document.body.classList.remove('dark');
+    let popped = 0;
+    const next = $('#balloonNext', sec);
+    $$('.balloon', sec).forEach(b => b.addEventListener('click', () => {
+      if (b.classList.contains('popped')) return;
+      const hadFocus = document.activeElement === b, cell = b.parentElement, r = b.getBoundingClientRect();
+      b.classList.add('popped'); sound.pop();
+      fx.pop(r.left + r.width / 2, r.top + r.height * .33, cell.style.getPropertyValue('--c').trim() || C.cherry);
+      popped++; $('#popCount', sec).textContent = `${popped} of 6 popped`;
+      setTimeout(() => {
+        b.hidden = true; $('.note', cell).hidden = false;
+        if (hadFocus) { const n = $$('.balloon', sec).find(x => !x.classList.contains('popped')); if (n) n.focus(); }
+      }, 170);
+      if (popped === 6) setTimeout(() => { sound.chime(); fx.rain(50); next.classList.add('show'); if (hadFocus) next.focus(); }, 800);
+    }));
+    next.addEventListener('click', () => go(3));
+  },
+  sec => { /* gift */
+    let taps = 0;
+    const gift = $('#gift', sec), hint = $('#giftHint', sec), lines = ['Tap the box to unwrap it', 'Ooh, something rattles…', 'One more tap!'];
+    gift.addEventListener('click', async () => {
+      if (gift.classList.contains('open')) return;
+      taps++;
+      if (taps < 3) { gift.classList.remove('wiggle'); void gift.offsetWidth; gift.classList.add('wiggle'); sound.tick(); hint.textContent = lines[taps]; return; }
+      gift.classList.add('open'); gift.setAttribute('aria-label', 'Gift unwrapped'); hint.textContent = 'It’s all yours!';
+      const r = gift.getBoundingClientRect();
+      sound.chime(); fx.sparkle(r.left + r.width / 2, r.top + r.height * .3, 22); fx.burst(r.left + r.width / 2, r.top + r.height * .35, 60, {speed: 720, spread: 1.5});
+      await wait(380); const v = $('#voucher', sec); v.classList.add('up'); v.setAttribute('aria-hidden', 'false');
+      await wait(1300); $('#giftNext', sec).classList.add('show');
+    });
+    $('#giftNext', sec).addEventListener('click', () => go(4));
+  },
+  sec => { /* letter */
+    const letter = $('#letter', sec), end = $('#endActions', sec), count = $$('.w', letter).length;
+    let finished = false;
+    const finish = () => {
+      if (finished || current !== 4) return; finished = true;
+      fx.show(4); sound.chime();
+      setTimeout(() => { fx.rain(70); end.classList.add('show'); }, 900);
+    };
+    const t1 = setTimeout(() => letter.classList.add('reveal'), 750);
+    const t2 = setTimeout(finish, 750 + (count + 6) * 38 + 600);
+    /* keep the newest words in view while the letter writes itself, until the reader scrolls on their own */
+    const ws = $$('.w', letter), startAt = performance.now() + 750;
+    let follow = true;
+    ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(t => letter.addEventListener(t, () => { follow = false; }, {passive: true}));
+    const step = now => {
+      if (!follow || current !== 4 || !letter.isConnected) return;
+      const idx = Math.min(ws.length - 1, Math.floor((now - startAt) / 38));
+      if (idx >= 0) {
+        const w = ws[idx], target = w.offsetTop + w.offsetHeight + 44 - letter.clientHeight;
+        if (target > letter.scrollTop) letter.scrollTop += Math.max(1, Math.min(7, (target - letter.scrollTop) * .12));
+      }
+      if (idx < ws.length - 1 || letter.scrollTop < letter.scrollHeight - letter.clientHeight - 2) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    letter.addEventListener('click', () => {
+      if (finished) return;
+      clearTimeout(t1); clearTimeout(t2); letter.classList.add('instant', 'reveal'); setTimeout(finish, 500);
+    });
+    $('#againBtn', sec).addEventListener('click', () => { sound.unlock(); fx.cannons(); fx.show(3); sound.song(); });
+    $('#restartBtn', sec).addEventListener('click', () => go(0));
+  }
+];
+
+function mount() {
+  document.title = `Happy Birthday, ${DATA.name}!`;
+  document.body.classList.remove('dark');
+  const app = document.getElementById('app');
+  app.innerHTML = topbarHtml() + LABELS.map((l, i) => `<section class="scene scene-${['env', 'cake', 'balloons', 'gift', 'letter'][i]}" aria-label="${l}"></section>`).join('');
+  sections = $$('.scene', app);
+  current = -1;
+  $('#soundBtn').addEventListener('click', e => {
+    const on = sound.toggle(), b = e.currentTarget;
+    b.innerHTML = on ? ICON.soundOn : ICON.soundOff; b.setAttribute('aria-pressed', String(on));
+  });
+  const eb = $('#editBtn'); eb.hidden = !canEditCard; eb.addEventListener('click', openEditor);
+  document.body.classList.add('instant');
+  go(0, true);
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('instant')));
+}
+
+/* ---------- personalize (owner only) ---------- */
+async function checkOwner() {
+  try {
+    if (!window.claude || typeof window.claude.use !== 'function') return;
+    const user = await window.claude.use('user');
+    if (!user) return;
+    canEditCard = !!((await user.canEdit()) || (await user.isOwner()));
+    const eb = $('#editBtn'); if (eb) eb.hidden = !canEditCard;
+  } catch (e) { /* stays hidden */ }
+}
+function buildDocument(data) {
+  const S = 'script';
+  const style = document.getElementById('card-style').textContent;
+  const script = document.getElementById('card-script').textContent;
+  const json = JSON.stringify(data, null, 2).replace(/</g, '\\u003c');
+  return SKELETON[0] + HEAD_BITS + '<style id="card-style">' + style + '</style>\n<div id="app"></div>\n<' + S + ' type="application/json" id="card-data">\n' + json + '\n</' + S + '>\n<' + S + ' id="card-script">' + script + '</' + S + '>' + SKELETON[1];
+}
+function openEditor() {
+  if ($('#editor')) return;
+  const d = DATA, box = document.createElement('div');
+  box.className = 'editor'; box.id = 'editor';
+  box.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="edTitle">
+    <div class="sheet-head"><div><h2 id="edTitle">Personalize the card</h2><p>Only you can see this button. Your friend just gets the card.</p></div>
+      <button class="close-x" id="edClose" type="button" aria-label="Close">${ICON.close}</button></div>
+    <form class="sheet-body" id="edForm" novalidate>
+      <div class="two">
+        <div class="field"><label for="ed-name">Friend’s name</label><input id="ed-name" maxlength="40" autocomplete="off" value="${esc(d.name)}"></div>
+        <div class="field"><label for="ed-from">Your name</label><input id="ed-from" maxlength="40" autocomplete="off" value="${esc(d.from)}"></div>
+      </div>
+      <div class="field"><label for="ed-message">Birthday message</label><textarea id="ed-message" maxlength="2000">${esc(d.message)}</textarea></div>
+      <div class="field"><label for="ed-signoff">Sign-off</label><input id="ed-signoff" maxlength="40" value="${esc(d.signoff)}"></div>
+      <p class="group-label" id="edReasons">Balloon notes</p>
+      <div class="reasons" role="group" aria-labelledby="edReasons">${d.reasons.map((r, i) => `<input id="ed-r${i}" maxlength="80" aria-label="Balloon note ${i + 1}" value="${esc(r)}">`).join('')}</div>
+      <div class="field"><label for="ed-gtitle">Gift voucher</label><input id="ed-gtitle" maxlength="60" value="${esc(d.giftTitle)}"></div>
+      <div class="field"><label for="ed-gnote">Voucher fine print</label><input id="ed-gnote" maxlength="90" value="${esc(d.giftNote)}"></div>
+    </form>
+    <div class="sheet-foot"><p class="save-status" id="edStatus" role="status"></p>
+      <button class="btn quiet" id="edPreview" type="button">Preview</button>
+      <button class="btn" id="edSave" type="button">Save card</button></div></div>`;
+  document.body.appendChild(box);
+  const collect = () => normalize({
+    name: $('#ed-name').value, from: $('#ed-from').value, signoff: $('#ed-signoff').value,
+    message: $('#ed-message').value.replace(/\r\n?/g, '\n'), giftTitle: $('#ed-gtitle').value, giftNote: $('#ed-gnote').value,
+    reasons: DEFAULTS.reasons.map((_, i) => $('#ed-r' + i).value)
+  });
+  const close = () => { box.remove(); document.removeEventListener('keydown', onKey); const eb = $('#editBtn'); if (eb) eb.focus(); };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  document.addEventListener('keydown', onKey);
+  box.addEventListener('click', e => { if (e.target === box) close(); });
+  $('#edClose').addEventListener('click', close);
+  $('#edForm').addEventListener('submit', e => e.preventDefault());
+  $('#edPreview').addEventListener('click', () => { DATA = collect(); close(); mount(); });
+  $('#edSave').addEventListener('click', async () => {
+    const st = $('#edStatus'), btn = $('#edSave'), data = collect();
+    st.className = 'save-status'; st.textContent = 'Saving…'; btn.disabled = true;
+    const publish = async () => {
+      const art = (window.claude && typeof window.claude.use === 'function') ? await window.claude.use('artifact') : null;
+      if (!art) throw {code: 'not_granted'};
+      return art.publish(buildDocument(data));
+    };
+    try {
+      try { await publish(); }
+      catch (e) { if (e && e.code === 'upstream_error') { await wait(rand(700, 1400)); await publish(); } else throw e; }
+      DATA = data; st.textContent = 'Saved! The card is reloading with your changes.';
+    } catch (e) {
+      const code = e && e.code;
+      const readOnly = ['not_writer', 'not_granted', 'not_declared', 'capability_disabled', 'capability_removed', 'consent_required'];
+      st.textContent = ({
+        conflict: 'A newer version was saved first, so the card is reloading. Make your edits again once it loads.',
+        too_large: 'That’s more text than the card can hold. Try a shorter message.',
+        rate_limited: 'Saving too quickly. Wait a minute, then try again.',
+        invalid_content: 'Something in the text couldn’t be saved. Try removing unusual characters.'
+      })[code] || (readOnly.includes(code) ? 'Saving isn’t available in this view. Open the card in your Claude app, or ask Claude to update it.' : 'Couldn’t save just now. Check your connection and try again.');
+      st.classList.add('bad'); btn.disabled = false;
+    }
+  });
+  setTimeout(() => $('#ed-name').focus(), 60);
+}
+
+/* ---------- boot ---------- */
+function boot() {
+  drawSprinkles(); fx.init(); mount(); checkOwner();
+  let rt = 0;
+  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { drawSprinkles(); fx.resize(); }, 160); });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+</body>
+</html>
