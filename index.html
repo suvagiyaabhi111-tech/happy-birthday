@@ -258,6 +258,146 @@ body.dark .cake-svg{filter:brightness(var(--bright,.8)) saturate(.9)}
   .scene,.scene.on{transition-duration:.01s !important; transition-delay:0s !important}
   .w{transition-delay:0s !important}
 }
+
+/* ---------- polish layer: paper grain, soft depth, staged motion ---------- */
+:root{
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .29 0 0 0 0 .14 0 0 0 0 .12 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --soft:0 22px 36px -14px rgba(74,36,32,.38);
+}
+body{background-image:radial-gradient(120% 90% at 50% 28%, rgba(255,255,255,.4), rgba(255,255,255,0) 62%), var(--grain)}
+body.dark{background-image:radial-gradient(110% 80% at 50% 40%, rgba(255,180,110,.10), rgba(0,0,0,0) 60%), var(--grain)}
+.title{text-shadow:0 3px 0 rgba(255,255,255,.75), 0 12px 26px rgba(240,56,107,.18)}
+
+/* ambient hearts drifting up behind everything */
+.floaters{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; transition:opacity .9s}
+body.dark .floaters{opacity:.2}
+.floaters span{position:absolute; left:var(--x); bottom:-44px; width:var(--s); height:var(--s); opacity:.3; animation:float-up var(--d) linear var(--delay) infinite}
+.floaters svg{display:block; width:100%; height:100%; animation:sway-x 3.6s ease-in-out infinite alternate}
+@keyframes float-up{to{transform:translateY(calc(-100vh - 90px))}}
+@keyframes sway-x{from{transform:translateX(calc(var(--sw) * -1)) rotate(-14deg)} to{transform:translateX(var(--sw)) rotate(14deg)}}
+
+/* every scene builds in, one element after another */
+@keyframes enter{0%{opacity:0; transform:translateY(30px) scale(.94)}}
+.scene.on .stack > :where(:not(.reveal-later, .letter-wrap, .balloon-grid)){animation:enter .85s cubic-bezier(.2,.9,.3,1.12) backwards}
+.scene.on .stack > :where(:nth-child(1)){animation-delay:.24s}
+.scene.on .stack > :where(:nth-child(2)){animation-delay:.34s}
+.scene.on .stack > :where(:nth-child(3)){animation-delay:.44s}
+.scene.on .stack > :where(:nth-child(4)){animation-delay:.54s}
+.scene.on .stack > :where(:nth-child(5)){animation-delay:.64s}
+
+/* buttons: soft coloured lift and a slow shine */
+.btn{position:relative; overflow:hidden; box-shadow:0 4px 0 var(--ink), 0 14px 22px -10px rgba(240,56,107,.6)}
+.btn.quiet{box-shadow:0 4px 0 var(--ink), 0 14px 22px -12px rgba(74,36,32,.4)}
+.btn:active{box-shadow:0 1px 0 var(--ink), 0 6px 10px -6px rgba(240,56,107,.5)}
+.btn.reveal-later.show::after,#againBtn::after{content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%); transform:translateX(-130%); animation:btn-shine 3.4s ease-in-out 1s infinite; pointer-events:none}
+@keyframes btn-shine{0%{transform:translateX(-130%)} 35%,100%{transform:translateX(130%)}}
+.icon-btn,.edit-btn,.pill{box-shadow:0 3px 0 var(--ink), 0 10px 16px -10px rgba(74,36,32,.45)}
+
+/* envelope: float with a little "open me" wiggle, shine, sparkles, cast shadow */
+@keyframes env-float{0%,100%{transform:translateY(0) rotate(-1.5deg)} 30%{transform:translateY(-9px) rotate(1.2deg)} 60%{transform:translateY(0) rotate(-1.5deg)}
+  67%{transform:translateY(-5px) rotate(3deg)} 73%{transform:translateY(-5px) rotate(-3deg)} 79%{transform:translateY(-3px) rotate(2deg)} 86%{transform:translateY(0) rotate(-1.5deg)}}
+.envelope{animation-duration:4.6s}
+.float-shadow{display:block; width:72%; height:16px; margin:16px auto 0; border-radius:50%; background:radial-gradient(closest-side, rgba(74,36,32,.32), rgba(74,36,32,0)); animation:float-shadow 4.6s ease-in-out infinite}
+@keyframes float-shadow{0%,60%,86%,100%{transform:scaleX(1); opacity:1} 30%{transform:scaleX(.84); opacity:.65} 67%,79%{transform:scaleX(.9); opacity:.8}}
+.envelope.opening ~ .float-shadow{animation:none; opacity:.5}
+.env-pocket .shine{animation:shine 4.6s ease-in-out 1.2s infinite}
+@keyframes shine{0%{transform:translateX(0)} 38%,100%{transform:translateX(480px)}}
+.env-flap{transition:transform .6s cubic-bezier(.45,0,.2,1), filter .6s}
+.envelope.flap-open .env-flap{filter:brightness(.88)}
+.env-letter{box-shadow:0 -6px 18px -8px rgba(74,36,32,.3)}
+.env-letter::after,.greet-card::after,.note::after{content:""; position:absolute; inset:0; border-radius:inherit; background:var(--grain); pointer-events:none}
+.envelope.opening .seal{animation:seal-off .75s cubic-bezier(.3,.6,.4,1) forwards; transition:none}
+@keyframes seal-off{0%{transform:translate(-50%,-50%) scale(1)} 16%{transform:translate(-50%,-50%) scale(.8)} 42%{transform:translate(-50%,-125%) scale(1.15) rotate(-25deg); opacity:1} 100%{transform:translate(-50%,280%) scale(.9) rotate(-170deg); opacity:0}}
+.seal-sparks{z-index:6; left:50%; top:60.5%; width:36%; aspect-ratio:1; transform:translate(-50%,-50%); pointer-events:none; transition:opacity .2s}
+.seal-sparks i{position:absolute; display:block; width:22%; animation:twinkle-s 1.8s ease-in-out infinite}
+.seal-sparks i svg,.tw i svg{display:block; width:100%; height:auto}
+.seal-sparks i:nth-child(1){left:-4%; top:2%}
+.seal-sparks i:nth-child(2){right:-6%; top:16%; width:16%; animation-delay:-.6s}
+.seal-sparks i:nth-child(3){right:8%; bottom:-6%; width:14%; animation-delay:-1.2s}
+@keyframes twinkle-s{0%,100%{transform:scale(.25) rotate(0); opacity:0} 50%{transform:scale(1) rotate(45deg); opacity:1}}
+.envelope.opening .seal-sparks{opacity:0}
+
+/* greeting: 3D flip-in over spinning sun rays, then a gentle float */
+.greeting{overflow:hidden}
+.rays{position:absolute; left:50%; top:46%; --rs:min(170vmax, 1400px); width:var(--rs); height:var(--rs); margin:calc(var(--rs) / -2) 0 0 calc(var(--rs) / -2);
+  opacity:0; transform:scale(.3); transition:opacity .8s ease, transform 1.3s cubic-bezier(.2,.9,.3,1); pointer-events:none}
+.rays i{position:absolute; inset:0; border-radius:50%; background:repeating-conic-gradient(from 0deg, rgba(255,224,130,.75) 0deg 8deg, rgba(255,224,130,0) 8deg 20deg);
+  -webkit-mask:radial-gradient(closest-side, #000 6%, rgba(0,0,0,.55) 30%, transparent 62%); mask:radial-gradient(closest-side, #000 6%, rgba(0,0,0,.55) 30%, transparent 62%); animation:spin 30s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scene-env.revealed .greeting .rays{opacity:1; transform:scale(1)}
+.greet-float{position:relative; perspective:1100px}
+.scene-env.revealed .greet-float{animation:card-float 5s ease-in-out 1.8s infinite}
+@keyframes card-float{0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)}}
+.greet-card{box-shadow:0 6px 0 var(--ink), var(--soft); transform:translateY(70px) rotateY(-78deg) scale(.55); transform-origin:50% 60%; transition:transform 1.1s cubic-bezier(.2,1.25,.3,1), opacity .45s}
+.tw{position:absolute; inset:0; pointer-events:none}
+.tw i{position:absolute; display:block; width:22px; opacity:0}
+.scene-env.revealed .tw i{animation:twinkle-s 2.2s ease-in-out infinite}
+.tw i:nth-child(1){left:-15px; top:30%}
+.tw i:nth-child(2){right:-13px; top:16%; width:16px}
+.tw i:nth-child(3){right:-17px; bottom:24%; width:25px}
+.tw i:nth-child(4){left:-11px; bottom:10%; width:15px}
+.scene-env.revealed .tw i:nth-child(1){animation-delay:1.3s}
+.scene-env.revealed .tw i:nth-child(2){animation-delay:1.8s}
+.scene-env.revealed .tw i:nth-child(3){animation-delay:2.3s}
+.scene-env.revealed .tw i:nth-child(4){animation-delay:2.8s}
+
+/* cake: glowing flames with a blue base, candles that lean when blown, a happy hop */
+.candle .stick{background:linear-gradient(90deg, rgba(74,36,32,.2), rgba(255,255,255,.45) 36%, rgba(255,255,255,0) 60%, rgba(74,36,32,.16)),
+  repeating-linear-gradient(-55deg, var(--c) 0 calc(4 * var(--k)), #fff calc(4 * var(--k)) calc(8 * var(--k)))}
+.candle .halo{position:absolute; left:50%; bottom:calc((var(--h) - 20) * var(--k)); width:calc(70 * var(--k)); height:calc(70 * var(--k)); margin-left:calc(-35 * var(--k)); border-radius:50%;
+  background:radial-gradient(closest-side, rgba(255,224,140,.8), rgba(255,180,90,.28) 45%, rgba(255,180,90,0)); opacity:0; transition:opacity .5s; pointer-events:none}
+.candle:not(.unlit):not(.out) .halo{opacity:1; animation:halo 2.4s ease-in-out infinite}
+@keyframes halo{0%,100%{transform:scale(1)} 50%{transform:scale(1.14)}}
+.candle .flame::before{content:""; position:absolute; left:27%; bottom:10%; width:46%; height:42%; border-radius:50% 50% 45% 45%; background:radial-gradient(ellipse at 50% 85%, rgba(110,160,255,.9), rgba(110,160,255,0) 72%)}
+.candle .flame::after{content:""; position:absolute; left:33%; bottom:24%; width:34%; height:40%; border-radius:50%; background:radial-gradient(#fff, rgba(255,255,255,0) 72%)}
+.candle.out .flame{animation:blow-out .5s ease-in forwards; transition:none}
+@keyframes blow-out{0%{transform:none; opacity:1} 45%{transform:translateX(calc(5 * var(--k))) skewX(-28deg) scale(.95,.75); opacity:1} 100%{transform:translateX(calc(11 * var(--k))) skewX(-40deg) scale(0); opacity:0}}
+.cake-wrap{transform-origin:50% 92%}
+.scene.on .cake-wrap.happy{animation:cake-jump 1s cubic-bezier(.3,1.4,.5,1)}
+@keyframes cake-jump{0%{transform:none} 18%{transform:scale(1.06,.9) translateY(4%)} 45%{transform:scale(.96,1.06) translateY(-9%)} 70%{transform:scale(1.02,.98)} 100%{transform:none}}
+
+/* balloons: squish on press, comic POP!, notes swing down from their pins */
+.balloon svg{transition:transform .15s}
+.balloon:active svg{transform:scale(.9,1.08)}
+.pop-burst{position:absolute; left:50%; top:26%; width:96px; margin-left:-48px; z-index:3; pointer-events:none; animation:burst .65s cubic-bezier(.3,1.6,.5,1) forwards}
+.pop-burst text{font-family:var(--display); font-weight:700}
+@keyframes burst{0%{transform:scale(.2) rotate(-20deg); opacity:1} 45%{transform:scale(1.1) rotate(6deg); opacity:1} 100%{transform:scale(1.3) rotate(10deg); opacity:0}}
+.note{transform-origin:50% 0; box-shadow:0 3px 0 var(--ink), 0 14px 20px -12px rgba(74,36,32,.45)}
+@keyframes note-in{0%{transform:perspective(600px) rotateX(-100deg) rotate(var(--r)); opacity:0} 55%{transform:perspective(600px) rotateX(18deg) rotate(var(--r)); opacity:1}
+  78%{transform:perspective(600px) rotateX(-8deg) rotate(var(--r))} 100%{transform:perspective(600px) rotateX(0) rotate(var(--r)); opacity:1}}
+
+/* gift: idle hop, lid jiggle on each tap, light rays and a shimmer on the voucher */
+.gift svg{animation:gift-idle 3.4s ease-in-out 1.4s infinite}
+@keyframes gift-idle{0%,70%,100%{transform:none} 78%{transform:scale(1.05,.93)} 86%{transform:translateY(-11px) scale(.97,1.04)} 93%{transform:scale(1.02,.98)}}
+.gift.open svg{animation:none}
+.gift.wiggle:not(.open) .lid{animation:lid-hop .5s ease-out}
+@keyframes lid-hop{0%,100%{transform:none} 35%{transform:translateY(-12px) rotate(-3deg)}}
+.gift-rays{--rs:calc(var(--gs) * 1.8); top:24%}
+.gift-rays i{-webkit-mask:radial-gradient(closest-side, #000 24%, rgba(0,0,0,.6) 48%, transparent 72%); mask:radial-gradient(closest-side, #000 24%, rgba(0,0,0,.6) 48%, transparent 72%)}
+.scene-gift .title,.scene-gift .hint{position:relative; z-index:3}
+.gift-stage.open .gift-rays{opacity:1; transform:scale(1)}
+.voucher{filter:drop-shadow(2.5px 0 0 var(--ink)) drop-shadow(-2.5px 0 0 var(--ink)) drop-shadow(0 2.5px 0 var(--ink)) drop-shadow(0 -2.5px 0 var(--ink)) drop-shadow(0 4px 0 var(--ink)) drop-shadow(0 16px 16px rgba(74,36,32,.28))}
+.v-in{position:relative}
+.v-in::after{content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(105deg, transparent 38%, rgba(255,255,255,.7) 50%, transparent 62%), var(--grain); background-size:260% 100%, 180px 180px; background-position:160% 0, 0 0}
+.voucher.up .v-in::after{animation:shimmer 1.5s ease-out 1s both}
+@keyframes shimmer{from{background-position:160% 0, 0 0} to{background-position:-70% 0, 0 0}}
+
+/* letter: words appear like fresh ink, the heart beats */
+.letter{box-shadow:0 5px 0 var(--ink), var(--soft);
+  background-image:var(--grain), linear-gradient(90deg, transparent 31px, rgba(240,56,107,.38) 31px 33px, transparent 33px), linear-gradient(transparent calc(var(--lh) - 1.5px), rgba(134,200,255,.6) calc(var(--lh) - 1.5px));
+  background-size:180px 180px, 100% 100%, 100% var(--lh); background-origin:padding-box, padding-box, content-box; background-attachment:local, local, local}
+span.w{display:inline-block; filter:blur(4px); transform:translateY(6px); transition:opacity .55s ease, filter .55s ease, transform .55s cubic-bezier(.2,.9,.3,1); transition-delay:calc(var(--i) * 38ms)}
+.letter.reveal span.w{filter:blur(0); transform:none}
+.letter.instant span.w{transition-delay:0s}
+.letter .from svg{animation:beat 1.3s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)} 15%{transform:scale(1.25)} 30%{transform:scale(1)} 45%{transform:scale(1.16)}}
+
+@media (prefers-reduced-motion: reduce){
+  .floaters{display:none}
+  .rays i,.env-pocket .shine,.gift svg,.greet-float,.float-shadow,.seal-sparks i,.tw i,.candle .halo,.letter .from svg,.btn::after{animation:none !important}
+  .scene.on .stack > *{animation:none !important}
+  span.w{filter:none !important; transform:none !important}
+}
 </style>
 </head>
 <body>
@@ -297,6 +437,13 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const rand = (a, b) => a + Math.random() * (b - a);
 const pick = a => a[Math.floor(Math.random() * a.length)];
+const mix = (hex, t, to) => {
+  const n = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)), a = n(hex), b = n(to);
+  return '#' + a.map((v, i) => Math.round(v + (b[i] - v) * t).toString(16).padStart(2, '0')).join('');
+};
+const lighten = (hex, t) => mix(hex, t, '#ffffff');
+const darken = (hex, t) => mix(hex, t, '#4a2420');
+let heartPath = null;
 
 function normalize(d) {
   d = d && typeof d === 'object' ? d : {};
@@ -381,11 +528,13 @@ const fx = (() => {
   }
   function resize() {
     if (!cv) return;
-    const dpr = Math.min(2, window.devicePixelRatio || 1); W = innerWidth; H = innerHeight;
+    const dpr = Math.min(3, window.devicePixelRatio || 1); W = innerWidth; H = innerHeight;
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   function add(p) {
-    parts.push(Object.assign({rot: rand(0, 6.28), vr: rand(-8, 8), tilt: rand(0, 6.28), vt: rand(4, 12), g: 520, drag: 1.9, life: rand(3, 5), fade: .6, size: rand(6, 10), shape: 'rect', alpha: 1}, p));
+    p = Object.assign({rot: rand(0, 6.28), vr: rand(-8, 8), tilt: rand(0, 6.28), vt: rand(4, 12), g: 520, drag: 1.9, life: rand(3, 5), fade: .6, size: rand(6, 10), shape: 'rect', alpha: 1}, p);
+    p.dark = /^#[0-9a-f]{6}$/i.test(p.color) ? darken(p.color, .3) : p.color;
+    parts.push(p);
     if (!running) { running = true; last = performance.now(); requestAnimationFrame(tick); }
   }
   function tick(now) {
@@ -407,12 +556,24 @@ const fx = (() => {
     cx.save(); cx.globalAlpha = a; cx.fillStyle = p.color; cx.strokeStyle = p.color;
     if (p.shape === 'spark') {
       if (p.trail && p.trail.length > 1) { cx.lineWidth = p.size * .7; cx.lineCap = 'round'; cx.beginPath(); cx.moveTo(p.trail[0][0], p.trail[0][1]); for (const q of p.trail) cx.lineTo(q[0], q[1]); cx.globalAlpha = a * .45; cx.stroke(); cx.globalAlpha = a; }
-      cx.beginPath(); cx.arc(p.x, p.y, p.size, 0, 6.283); cx.fill(); cx.restore(); return;
+      cx.globalAlpha = a * .2; cx.beginPath(); cx.arc(p.x, p.y, p.size * 3.4, 0, 6.283); cx.fill();
+      cx.globalAlpha = a; cx.beginPath(); cx.arc(p.x, p.y, p.size, 0, 6.283); cx.fill();
+      cx.globalAlpha = a * .9; cx.fillStyle = '#fff'; cx.beginPath(); cx.arc(p.x, p.y, p.size * .45, 0, 6.283); cx.fill(); cx.restore(); return;
     }
     cx.translate(p.x, p.y); cx.rotate(p.rot);
-    const s = p.size;
-    if (p.shape === 'rect') { cx.scale(1, Math.cos(p.tilt)); cx.fillRect(-s / 2, -s * .32, s, s * .64); }
-    else if (p.shape === 'circle') { cx.scale(1, .6 + .4 * Math.abs(Math.cos(p.tilt))); cx.beginPath(); cx.arc(0, 0, s * .42, 0, 6.283); cx.fill(); }
+    const s = p.size, back = Math.cos(p.tilt) < 0;
+    if (p.shape === 'rect') { cx.fillStyle = back ? p.dark : p.color; cx.scale(1, Math.cos(p.tilt)); cx.fillRect(-s / 2, -s * .32, s, s * .64); }
+    else if (p.shape === 'circle') { cx.fillStyle = back ? p.dark : p.color; cx.scale(1, .6 + .4 * Math.abs(Math.cos(p.tilt))); cx.beginPath(); cx.arc(0, 0, s * .42, 0, 6.283); cx.fill(); }
+    else if (p.shape === 'ribbon') {
+      cx.strokeStyle = back ? p.dark : p.color; cx.lineCap = 'round'; cx.lineWidth = s * .34; cx.beginPath();
+      for (let k = 0; k <= 12; k++) { const u = k / 12, x = (u - .5) * s * 2.8, y = Math.sin(u * 6.283 + p.tilt) * s * .38; k ? cx.lineTo(x, y) : cx.moveTo(x, y); }
+      cx.stroke();
+    }
+    else if (p.shape === 'heart') {
+      heartPath = heartPath || new Path2D(HEART);
+      const k = s / 24; cx.scale(k, k); cx.translate(-12, -12); cx.fill(heartPath);
+      cx.lineWidth = 1.6; cx.strokeStyle = 'rgba(74,36,32,.55)'; cx.stroke(heartPath);
+    }
     else if (p.shape === 'sprinkle') { cx.lineCap = 'round'; cx.lineWidth = s * .42; cx.beginPath(); cx.moveTo(-s * .6, 0); cx.lineTo(s * .6, 0); cx.stroke(); }
     else if (p.shape === 'star') {
       cx.beginPath();
@@ -425,7 +586,7 @@ const fx = (() => {
   return {
     init, resize,
     burst(x, y, n, o = {}) {
-      const {angle = -Math.PI / 2, spread = Math.PI * 2, speed = 520, colors = PARTY, shapes = ['rect', 'rect', 'circle', 'sprinkle'], g = 520, drag = 1.9, life = [3, 5], size = [6, 11]} = o;
+      const {angle = -Math.PI / 2, spread = Math.PI * 2, speed = 520, colors = PARTY, shapes = ['rect', 'rect', 'circle', 'sprinkle', 'ribbon'], g = 520, drag = 1.9, life = [3, 5], size = [6, 11]} = o;
       for (let i = 0; i < scale(n); i++) {
         const an = angle + rand(-spread / 2, spread / 2), sp = speed * rand(.45, 1);
         add({x, y, vx: Math.cos(an) * sp, vy: Math.sin(an) * sp, color: pick(colors), shape: pick(shapes), g, drag, life: rand(life[0], life[1]), size: rand(size[0], size[1])});
@@ -435,7 +596,11 @@ const fx = (() => {
       this.burst(-10, H * .95, 110, {angle: -Math.PI * .32, spread: .9, speed: 1250});
       this.burst(W + 10, H * .95, 110, {angle: -Math.PI * .68, spread: .9, speed: 1250});
     },
-    rain(n = 90) { for (let i = 0; i < scale(n); i++) add({x: rand(0, W), y: rand(-H * .4, -10), vx: rand(-40, 40), vy: rand(40, 140), color: pick(PARTY), shape: pick(['rect', 'circle', 'sprinkle']), life: rand(4, 6.5), size: rand(6, 11)}); },
+    rain(n = 90) { for (let i = 0; i < scale(n); i++) add({x: rand(0, W), y: rand(-H * .4, -10), vx: rand(-40, 40), vy: rand(40, 140), color: pick(PARTY), shape: pick(['rect', 'circle', 'sprinkle', 'ribbon']), life: rand(4, 6.5), size: rand(6, 11)}); },
+    hearts(x, y, n = 10, spread = 50, dir = 0) {
+      for (let i = 0; i < scale(n); i++) add({x: x + rand(-spread, spread), y: y + rand(-10, 10), vx: dir ? dir * rand(15, 75) : rand(-60, 60), vy: rand(-240, -120), g: -25, drag: 1.3, rot: rand(-.35, .35), vr: rand(-.8, .8),
+        color: pick([C.cherry, C.pink, C.butter, '#ffffff', C.lilac]), shape: 'heart', life: rand(1.8, 2.8), fade: .9, size: rand(15, 26)});
+    },
     pop(x, y, color) { this.burst(x, y, 22, {colors: [color, color, '#ffffff'], shapes: ['rect', 'sprinkle'], speed: 460, g: 900, drag: 3.2, life: [.7, 1.2], size: [5, 9]}); },
     sparkle(x, y, n = 18) { this.burst(x, y, n, {colors: [C.butter, '#ffffff', C.pink, C.sky], shapes: ['star'], speed: 300, g: 120, drag: 2.6, life: [.8, 1.4], size: [8, 14]}); },
     firework(x, y) {
@@ -457,7 +622,7 @@ const fx = (() => {
 function drawSprinkles() {
   let cv = document.getElementById('bg');
   if (!cv) { cv = document.createElement('canvas'); cv.id = 'bg'; cv.setAttribute('aria-hidden', 'true'); document.body.prepend(cv); }
-  const dpr = Math.min(2, window.devicePixelRatio || 1), w = innerWidth, h = innerHeight;
+  const dpr = Math.min(3, window.devicePixelRatio || 1), w = innerWidth, h = innerHeight;
   cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
   const c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h); c.lineCap = 'round';
   const cols = [C.cherry, C.butter, C.mint, C.sky, C.lilac, C.tangerine, '#ffffff'];
@@ -499,15 +664,22 @@ function topbarHtml() {
 function sealSvg() {
   let d = '';
   for (let i = 0; i <= 120; i++) { const t = i / 120 * Math.PI * 2, r = 26 + 2.4 * Math.cos(t * 13); d += (i ? 'L' : 'M') + (Math.cos(t) * r).toFixed(2) + ' ' + (Math.sin(t) * r).toFixed(2); }
-  return `<svg viewBox="-32 -32 64 64" aria-hidden="true"><path d="${d}Z" fill="${C.cherry}" stroke="${C.ink}" stroke-width="2.6" stroke-linejoin="round"/>
-    <circle r="18" fill="none" stroke="${C.cherryDark}" stroke-width="2.2"/>
+  return `<svg viewBox="-32 -32 64 64" aria-hidden="true"><defs><radialGradient id="sealG" cx="36%" cy="30%" r="78%"><stop offset="0" stop-color="#FF86A6"/><stop offset=".48" stop-color="${C.cherry}"/><stop offset="1" stop-color="#B51C48"/></radialGradient></defs>
+    <path d="${d}Z" fill="url(#sealG)" stroke="${C.ink}" stroke-width="2.6" stroke-linejoin="round"/>
+    <circle r="18" fill="none" stroke="${C.cherryDark}" stroke-width="2.2"/><circle r="18" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="1" transform="translate(-.8 -.8)"/>
     <path transform="translate(-10.8 -11.6) scale(.9)" d="${HEART}" fill="${C.pinkLight}" stroke="${C.cherryDark}" stroke-width="1.7" stroke-linejoin="round"/>
     <path d="M-15 -12A19 19 0 0 1-4-18.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round"/></svg>`;
 }
-function sunflowerSvg() {
+function sunflowerSvg(k) {
+  const id = 'sf' + k;
   const ring = (off, fill, cy, rx, ry) => Array.from({length: 12}, (_, i) => `<ellipse cx="0" cy="${cy}" rx="${rx}" ry="${ry}" transform="rotate(${i * 30 + off})" fill="${fill}" stroke="${C.ink}" stroke-width="2.4"/>`).join('');
-  return `<svg viewBox="-44 -44 88 88" aria-hidden="true">${ring(15, '#FFBE2E', -24, 7.5, 15)}${ring(0, C.butter, -22, 8, 14)}
-    <circle r="16" fill="#8A5136" stroke="${C.ink}" stroke-width="2.6"/>
+  let seeds = '';
+  for (let i = 1; i < 30; i++) { const r = 2.4 * Math.sqrt(i), a = i * 2.39996; seeds += `<circle cx="${(Math.cos(a) * r).toFixed(1)}" cy="${(Math.sin(a) * r).toFixed(1)}" r=".9" fill="#4E2A18" opacity=".55"/>`; }
+  return `<svg viewBox="-44 -44 88 88" aria-hidden="true"><defs>
+    <radialGradient id="${id}p" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="40"><stop offset=".3" stop-color="#F59E0B"/><stop offset=".6" stop-color="#FFC531"/><stop offset="1" stop-color="#FFE59A"/></radialGradient>
+    <radialGradient id="${id}c" cx="36%" cy="32%" r="72%"><stop offset="0" stop-color="#B07448"/><stop offset="1" stop-color="#6A381F"/></radialGradient></defs>
+    ${ring(15, '#F0A21A', -24, 7.5, 15)}${ring(0, `url(#${id}p)`, -22, 8, 14)}
+    <circle r="16" fill="url(#${id}c)" stroke="${C.ink}" stroke-width="2.6"/>${seeds}
     <path d="M-9-1.5q3 3.2 6 0M3-1.5q3 3.2 6 0M-4 5q4 4 8 0" fill="none" stroke="${C.cream}" stroke-width="2.1" stroke-linecap="round"/>
     <ellipse cx="-10.5" cy="4.5" rx="3" ry="2" fill="${C.pink}"/><ellipse cx="10.5" cy="4.5" rx="3" ry="2" fill="${C.pink}"/></svg>`;
 }
@@ -550,17 +722,25 @@ function drip(cx, top, rx, ry, band, drips) {
 function cakeSvg() {
   const spr = [[54,240,30,C.sky],[76,232,-40,C.butter],[64,254,70,C.lilac],[92,246,10,C.mint],[100,262,-20,C.cherry],[124,262,35,C.sky],[176,262,-35,C.butter],
     [206,242,-30,C.mint],[226,232,40,C.cherry],[244,246,-60,C.sky],[214,258,20,C.lilac],[232,255,-10,C.butter]];
-  return `<svg class="cake-svg" viewBox="0 0 300 320" aria-hidden="true">
-    <ellipse cx="150" cy="306" rx="104" ry="8" fill="rgba(74,36,32,.14)"/>
-    <path d="M122 280L178 280L188 300Q150 310 112 300Z" fill="${C.paper}" ${K3}/>
-    <ellipse cx="150" cy="274" rx="132" ry="16" fill="${C.paper}" ${K3}/>
-    <path d="M46 182L46 258Q150 286 254 258L254 182Z" fill="${C.cream}" ${K3}/>
+  return `<svg class="cake-svg" viewBox="0 0 300 320" aria-hidden="true"><defs>
+    <linearGradient id="ckBot" x1="0" x2="1"><stop offset="0" stop-color="#EBD3BA"/><stop offset=".3" stop-color="#FFFAF2"/><stop offset=".62" stop-color="#FFF1E1"/><stop offset="1" stop-color="#E3C6AA"/></linearGradient>
+    <linearGradient id="ckTop" x1="0" x2="1"><stop offset="0" stop-color="#F391B2"/><stop offset=".32" stop-color="#FFCADB"/><stop offset=".64" stop-color="#FFB5CC"/><stop offset="1" stop-color="#EC86A9"/></linearGradient>
+    <linearGradient id="ckPink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFAFC9"/><stop offset="1" stop-color="#F2759D"/></linearGradient>
+    <linearGradient id="ckIce" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F4E8DC"/></linearGradient>
+    <linearGradient id="ckPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6DCF0"/></linearGradient>
+    <filter id="ckBlur" x="-30%" y="-200%" width="160%" height="500%"><feGaussianBlur stdDeviation="6"/></filter></defs>
+    <ellipse cx="150" cy="306" rx="112" ry="9" fill="rgba(74,36,32,.3)" filter="url(#ckBlur)"/>
+    <path d="M122 280L178 280L188 300Q150 310 112 300Z" fill="url(#ckPlate)" ${K3}/>
+    <ellipse cx="150" cy="274" rx="132" ry="16" fill="url(#ckPlate)" ${K3}/>
+    <path d="M40 272Q150 292 260 272" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M46 182L46 258Q150 286 254 258L254 182Z" fill="url(#ckBot)" ${K3}/>
     ${spr.map(([x, y, a, c]) => `<path d="M${x - 4} ${y}L${x + 4} ${y}" transform="rotate(${a} ${x} ${y})" stroke="${c}" stroke-width="4.2" stroke-linecap="round"/>`).join('')}
-    <path d="${drip(150, 182, 104, 13, 10, [[64,26],[96,18],[128,12],[172,14],[206,24],[238,16]])}" fill="${C.pink}" ${K3}/>
-    <path d="M78 122L78 186Q150 206 222 186L222 122Z" fill="${C.pinkLight}" ${K3}/>
+    <path d="${drip(150, 182, 104, 13, 10, [[64,26],[96,18],[128,12],[172,14],[206,24],[238,16]])}" fill="url(#ckPink)" ${K3}/>
+    <path d="M58 193q14 5 30 6M66 216v4M206 218v5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M78 122L78 186Q150 206 222 186L222 122Z" fill="url(#ckTop)" ${K3}/>
     ${[[96,172],[120,180],[180,180],[204,172],[150,184],[108,158],[192,158]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.2" fill="#fff"/>`).join('')}
-    <path d="${drip(150, 122, 72, 10, 9, [[92,18],[116,12],[142,22],[168,14],[198,20]])}" fill="${C.paper}" ${K3}/>
-    <ellipse cx="106" cy="247" rx="9" ry="5" fill="${C.blush}" opacity=".8"/><ellipse cx="194" cy="247" rx="9" ry="5" fill="${C.blush}" opacity=".8"/>
+    <path d="${drip(150, 122, 72, 10, 9, [[92,18],[116,12],[142,22],[168,14],[198,20]])}" fill="url(#ckIce)" ${K3}/>
+    <path d="M86 133q10 4 22 5M92 146v3M142 152v5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>    <ellipse cx="106" cy="247" rx="9" ry="5" fill="${C.blush}" opacity=".8"/><ellipse cx="194" cy="247" rx="9" ry="5" fill="${C.blush}" opacity=".8"/>
     <g class="wish"><path d="M118 232q8 7 16 0M166 232q8 7 16 0M143 243q7 6 14 0" fill="none" ${K3}/></g>
     <g class="yay"><circle cx="126" cy="234" r="6.5" fill="${C.ink}"/><circle cx="174" cy="234" r="6.5" fill="${C.ink}"/>
       <circle cx="128.4" cy="231.6" r="2.2" fill="#fff"/><circle cx="176.4" cy="231.6" r="2.2" fill="#fff"/>
@@ -569,28 +749,45 @@ function cakeSvg() {
 }
 const CANDLES = [{x:104,y:121,h:44,c:C.mint,d:1.05},{x:127,y:125,h:52,c:C.sky,d:1.3},{x:150,y:127,h:46,c:C.butter,d:.95},{x:173,y:125,h:54,c:C.lilac,d:1.2},{x:196,y:121,h:42,c:C.tangerine,d:1.1}];
 function candlesHtml() {
-  return CANDLES.map((c, i) => `<button class="candle unlit" type="button" aria-label="Blow out candle ${i + 1}" style="--x:${c.x};--y:${c.y};--h:${c.h};--c:${c.c};--d:${c.d}s"><span class="stick"></span><span class="wick"></span><span class="flame"></span><span class="smoke"></span></button>`).join('');
+  return CANDLES.map((c, i) => `<button class="candle unlit" type="button" aria-label="Blow out candle ${i + 1}" style="--x:${c.x};--y:${c.y};--h:${c.h};--c:${c.c};--d:${c.d}s"><span class="stick"></span><span class="wick"></span><span class="halo"></span><span class="flame"></span><span class="smoke"></span></button>`).join('');
 }
-function balloonSvg(col) {
-  return `<svg viewBox="0 0 100 170" aria-hidden="true">
+function balloonSvg(col, i) {
+  const id = 'bl' + i;
+  return `<svg viewBox="0 0 100 170" aria-hidden="true"><defs>
+    <radialGradient id="${id}" cx="34%" cy="28%" r="80%"><stop offset="0" stop-color="${lighten(col, .6)}"/><stop offset=".42" stop-color="${col}"/><stop offset="1" stop-color="${darken(col, .32)}"/></radialGradient>
+    <linearGradient id="${id}h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
     <path d="M50 122C42 134 60 144 50 156S46 166 52 170" fill="none" stroke="${C.ink}" stroke-width="2" stroke-linecap="round"/>
-    <path d="M50 6C78 6 94 30 94 56C94 88 70 110 50 114C30 110 6 88 6 56C6 30 22 6 50 6Z" fill="${col}" ${K3}/>
-    <path d="M44 122L50 113L56 122Z" fill="${col}" stroke="${C.ink}" stroke-width="2.6" stroke-linejoin="round"/>
-    <ellipse cx="30" cy="38" rx="7" ry="13" transform="rotate(24 30 38)" fill="#fff" opacity=".55"/><circle cx="38" cy="62" r="3" fill="#fff" opacity=".45"/></svg>`;
+    <path d="M50 6C78 6 94 30 94 56C94 88 70 110 50 114C30 110 6 88 6 56C6 30 22 6 50 6Z" fill="url(#${id})" ${K3}/>
+    <path d="M44 122L50 113L56 122Z" fill="${darken(col, .18)}" stroke="${C.ink}" stroke-width="2.6" stroke-linejoin="round"/>
+    <ellipse cx="30" cy="35" rx="8" ry="15" transform="rotate(24 30 35)" fill="url(#${id}h)"/><circle cx="40" cy="60" r="3" fill="#fff" opacity=".6"/>
+    <path d="M82 44C87 54 87 68 81 80" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="3" stroke-linecap="round"/></svg>`;
+}
+function popBurst() {
+  let d = '';
+  for (let i = 0; i <= 24; i++) { const a = i / 24 * Math.PI * 2, r = i % 2 ? 27 : 43; d += (i ? 'L' : 'M') + (Math.cos(a) * r).toFixed(1) + ' ' + (Math.sin(a) * r).toFixed(1); }
+  return `<svg class="pop-burst" viewBox="-48 -48 96 96" aria-hidden="true"><path d="${d}Z" fill="${C.butter}" stroke="${C.ink}" stroke-width="3" stroke-linejoin="round"/>
+    <text y="7" text-anchor="middle" font-size="20" fill="${C.cherry}" stroke="${C.ink}" stroke-width="1.2" paint-order="stroke">POP!</text></svg>`;
 }
 function giftSvg() {
   const star = (x, y, s) => `<path class="sparkle" d="M${x} ${y - s}Q${x} ${y} ${x + s} ${y}Q${x} ${y} ${x} ${y + s}Q${x} ${y} ${x - s} ${y}Q${x} ${y} ${x} ${y - s}Z" fill="${C.butter}" stroke="${C.ink}" stroke-width="1.6" stroke-linejoin="round"/>`;
-  return `<svg viewBox="0 0 220 200" aria-hidden="true">
-    <ellipse cx="110" cy="190" rx="84" ry="8" fill="rgba(74,36,32,.15)"/>
-    <rect x="34" y="94" width="152" height="92" rx="10" fill="${C.mint}" ${K3}/>
+  return `<svg viewBox="0 0 220 200" aria-hidden="true"><defs>
+    <linearGradient id="gBox" x1="0" x2="1"><stop offset="0" stop-color="#5CC6A5"/><stop offset=".3" stop-color="#94E8CF"/><stop offset=".7" stop-color="#7DDCC0"/><stop offset="1" stop-color="#52B999"/></linearGradient>
+    <linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4F5E6"/><stop offset="1" stop-color="#8CE0C6"/></linearGradient>
+    <linearGradient id="gRib" x1="0" x2="1"><stop offset="0" stop-color="#CF2253"/><stop offset=".45" stop-color="#FF6790"/><stop offset="1" stop-color="#CF2253"/></linearGradient>
+    <radialGradient id="gBow" cx="40%" cy="34%" r="72%"><stop offset="0" stop-color="#FF8AA8"/><stop offset="1" stop-color="#CF2253"/></radialGradient>
+    <filter id="gBlur" x="-30%" y="-200%" width="160%" height="500%"><feGaussianBlur stdDeviation="5"/></filter></defs>
+    <ellipse cx="110" cy="190" rx="88" ry="9" fill="rgba(74,36,32,.3)" filter="url(#gBlur)"/>
+    <rect x="34" y="94" width="152" height="92" rx="10" fill="url(#gBox)" ${K3}/>
     ${[[54,118],[72,164],[160,116],[174,162],[56,146],[166,140]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5" fill="#fff" opacity=".7"/>`).join('')}
-    <path d="M37 97H183V107H37Z" fill="#4FA88E"/>
-    <rect x="98" y="94" width="24" height="92" fill="${C.cherry}" ${K3}/>
+    <path d="M37 97H183V107H37Z" fill="#3F9A7F"/>
+    <rect x="98" y="94" width="24" height="92" fill="url(#gRib)" ${K3}/>
     <g class="lid">
-      <rect x="26" y="72" width="168" height="30" rx="8" fill="${C.mintLight}" ${K3}/>
-      <rect x="98" y="72" width="24" height="30" fill="${C.cherry}" ${K3}/>
-      <path d="M108 70C92 36 56 46 74 66C82 74 98 73 108 70Z" fill="${C.cherry}" ${K3}/>
-      <path d="M112 70C128 36 164 46 146 66C138 74 122 73 112 70Z" fill="${C.cherry}" ${K3}/>
+      <rect x="26" y="72" width="168" height="30" rx="8" fill="url(#gLid)" ${K3}/>
+      <path d="M36 80H88" stroke="#fff" stroke-opacity=".7" stroke-width="3" stroke-linecap="round"/>
+      <rect x="98" y="72" width="24" height="30" fill="url(#gRib)" ${K3}/>
+      <path d="M108 70C92 36 56 46 74 66C82 74 98 73 108 70Z" fill="url(#gBow)" ${K3}/>
+      <path d="M112 70C128 36 164 46 146 66C138 74 122 73 112 70Z" fill="url(#gBow)" ${K3}/>
+      <path d="M78 56Q84 46 94 48M126 48Q138 46 142 54" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round"/>
       <path d="M100 64C92 56 84 54 81 59M120 64C128 56 136 54 139 59" fill="none" stroke="${C.cherryDark}" stroke-width="2" stroke-linecap="round"/>
       <ellipse cx="110" cy="69" rx="10" ry="9" fill="${C.cherryDark}" ${K3}/>
     </g>
@@ -606,24 +803,36 @@ const BUILD = [
     <p class="eyebrow">From ${esc(d.from)}, with love</p>
     <h1 class="title" tabindex="-1">Guess whose birthday it is?</h1>
     <div class="env-wrap"><button class="envelope" id="envelope" type="button" aria-label="Open the envelope for ${esc(d.name)}">
-      <svg class="env-back" viewBox="0 0 300 200" aria-hidden="true"><rect x="2" y="2" width="296" height="196" rx="12" fill="${C.butterDeep}" ${K3}/></svg>
-      <span class="env-letter" aria-hidden="true"><span class="peek">${sunflowerSvg()}</span></span>
-      <svg class="env-pocket" viewBox="0 0 300 200" aria-hidden="true"><path d="M4 12L147 108L4 196Z" fill="${C.butter}" ${K3}/><path d="M296 12L153 108L296 196Z" fill="${C.butter}" ${K3}/><path d="M4 197L138 101Q150 92 162 101L296 197Z" fill="${C.butterLight}" ${K3}/></svg>
-      <svg class="env-flap" viewBox="0 0 300 200" aria-hidden="true"><path d="M3 5L297 5L163 115Q150 126 137 115Z" fill="#FFCB3D" ${K3}/></svg>
+      <svg class="env-back" viewBox="0 0 300 200" aria-hidden="true"><defs><linearGradient id="envIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D99516"/><stop offset=".55" stop-color="${C.butterDeep}"/></linearGradient></defs><rect x="2" y="2" width="296" height="196" rx="12" fill="url(#envIn)" ${K3}/></svg>
+      <span class="env-letter" aria-hidden="true"><span class="peek">${sunflowerSvg('a')}</span></span>
+      <svg class="env-pocket" viewBox="0 0 300 200" aria-hidden="true"><defs>
+        <linearGradient id="envL" x1="0" x2="1"><stop offset="0" stop-color="#FFC73A"/><stop offset="1" stop-color="#FFDC72"/></linearGradient>
+        <linearGradient id="envR" x1="1" x2="0"><stop offset="0" stop-color="#FFC73A"/><stop offset="1" stop-color="#FFDC72"/></linearGradient>
+        <linearGradient id="envB" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FFD45C"/><stop offset="1" stop-color="#FFEBAA"/></linearGradient>
+        <linearGradient id="shineG" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <clipPath id="envClip"><path d="M4 12L147 108L4 196Z"/><path d="M296 12L153 108L296 196Z"/><path d="M4 197L138 101Q150 92 162 101L296 197Z"/></clipPath></defs>
+        <path d="M4 12L147 108L4 196Z" fill="url(#envL)" ${K3}/><path d="M296 12L153 108L296 196Z" fill="url(#envR)" ${K3}/><path d="M4 197L138 101Q150 92 162 101L296 197Z" fill="url(#envB)" ${K3}/>
+        <g clip-path="url(#envClip)"><path class="shine" d="M-80 0H-30L-80 200H-130Z" fill="url(#shineG)"/></g></svg>
+      <svg class="env-flap" viewBox="0 0 300 200" aria-hidden="true"><defs><linearGradient id="envF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC32E"/><stop offset="1" stop-color="#FFD866"/></linearGradient></defs>
+        <path d="M6 7L294 7L164 122Q150 133 136 122Z" fill="rgba(74,36,32,.14)"/><path d="M3 5L297 5L163 115Q150 126 137 115Z" fill="url(#envF)" ${K3}/>
+        <path d="M30 14L140 102" stroke="#fff" stroke-opacity=".4" stroke-width="2.5" stroke-linecap="round"/></svg>
       <span class="seal" aria-hidden="true">${sealSvg()}</span>
+      <span class="seal-sparks" aria-hidden="true"><i>${ICON.sparkle}</i><i>${ICON.sparkle}</i><i>${ICON.sparkle}</i></span>
       <span class="env-to" aria-hidden="true"><small>For</small><b>${esc(d.name)}</b></span>
       <span class="stamp" aria-hidden="true">${stampSvg()}</span>
       <span class="postmark" aria-hidden="true">${postmarkSvg()}</span>
-    </button></div>
+    </button><span class="float-shadow" aria-hidden="true"></span></div>
     <p class="hint" id="envHint">Tap the heart to open</p></div>
   <div class="greeting" id="greeting" aria-hidden="true">
-    <div class="greet-card">
-      <span class="greet-flower">${sunflowerSvg()}</span>
+    <div class="rays" aria-hidden="true"><i></i></div>
+    <div class="greet-float"><div class="greet-card">
+      <span class="greet-flower">${sunflowerSvg('b')}</span>
       <p class="g-line g-happy" style="--i:0">Happy</p>
       <p class="g-line g-bday" style="--i:1">Birthday,</p>
       <p class="g-line g-name" style="--i:2"><span>${esc(d.name)}</span></p>
       <p class="g-line g-from" style="--i:3">with love from ${esc(d.from)} 💛</p>
-    </div>
+      <span class="tw" aria-hidden="true"><i>${ICON.sparkle}</i><i>${ICON.sparkle}</i><i>${ICON.sparkle}</i><i>${ICON.sparkle}</i></span>
+    </div></div>
     <button class="btn reveal-later" id="envNext" type="button">Let’s celebrate ${ICON.arrow}</button>
   </div>`,
   () => `<div class="stack">
@@ -636,13 +845,14 @@ const BUILD = [
     <p class="hint">Each one is hiding a little note for you</p>
     <span class="pill" id="popCount" aria-live="polite">0 of 6 popped</span>
     <div class="balloon-grid">${d.reasons.map((r, i) => `<div class="cell" style="--c:${BALLOON_COLS[i]};--r:${[-4, 3, -2, 4, -3, 2][i]}deg">
-      <button class="balloon" type="button" aria-label="Pop balloon ${i + 1} of 6" style="--delay:${(i * .12).toFixed(2)}s;--dur:${(3 + (i % 3) * .6).toFixed(1)}s;--neg:-${(i * .7).toFixed(1)}s"><span class="bob">${balloonSvg(BALLOON_COLS[i])}</span></button>
+      <button class="balloon" type="button" aria-label="Pop balloon ${i + 1} of 6" style="--delay:${(i * .12).toFixed(2)}s;--dur:${(3 + (i % 3) * .6).toFixed(1)}s;--neg:-${(i * .7).toFixed(1)}s"><span class="bob">${balloonSvg(BALLOON_COLS[i], i)}</span></button>
       <p class="note${r.length > 52 ? ' long' : ''}" hidden>${esc(r)}</p></div>`).join('')}</div>
     <button class="btn reveal-later" id="balloonNext" type="button">Next surprise ${ICON.arrow}</button></div>`,
   d => `<div class="stack">
     <h2 class="title" tabindex="-1">One more thing…</h2>
     <p class="hint" id="giftHint" aria-live="polite">Tap the box to unwrap it</p>
-    <div class="gift-stage">
+    <div class="gift-stage" id="giftStage">
+      <div class="rays gift-rays" aria-hidden="true"><i></i></div>
       <div class="voucher" id="voucher" aria-hidden="true"><div class="v-in">
         <div class="v-main"><span class="v-eyebrow">Birthday voucher</span><strong class="v-title">${esc(d.giftTitle)}</strong><span class="v-note">${esc(d.giftNote)}</span></div>
         <div class="v-stub"><span class="admit">Admit one</span><span class="no">No. 001</span></div></div></div>
@@ -709,6 +919,7 @@ const ENTER = [
       fx.cannons(); sound.chime();
       const r = $('.greet-card', sec).getBoundingClientRect();
       fx.sparkle(r.left + r.width / 2, r.top + 8, 22);
+      setTimeout(() => { fx.hearts(r.left + 14, r.top + r.height * .75, 6, 14, -1); fx.hearts(r.right - 14, r.top + r.height * .75, 6, 14, 1); }, 500);
       await wait(1700); if (current !== 0) return;
       next.classList.add('show'); if (hadFocus) next.focus();
     });
@@ -742,6 +953,8 @@ const ENTER = [
       await wait(30); b.classList.remove('instant');
       wrap.classList.add('happy');
       fx.cannons(); sound.song();
+      const cr = wrap.getBoundingClientRect();
+      setTimeout(() => { fx.hearts(cr.left + 20, cr.top + cr.height * .55, 7, 14, -1); fx.hearts(cr.right - 20, cr.top + cr.height * .55, 7, 14, 1); }, 350);
       const text = 'Your wish is on its way!';
       title.setAttribute('aria-label', text); title.innerHTML = lettersHtml(text);
       hint.textContent = `Lights on! Happy birthday, ${DATA.name} 💛`; hint.style.opacity = '1';
@@ -759,6 +972,9 @@ const ENTER = [
       const hadFocus = document.activeElement === b, cell = b.parentElement, r = b.getBoundingClientRect();
       b.classList.add('popped'); sound.pop();
       fx.pop(r.left + r.width / 2, r.top + r.height * .33, cell.style.getPropertyValue('--c').trim() || C.cherry);
+      cell.insertAdjacentHTML('beforeend', popBurst());
+      const burst = cell.lastElementChild; setTimeout(() => burst.remove(), 700);
+      try { if (navigator.vibrate) navigator.vibrate(18); } catch (e) {}
       popped++; $('#popCount', sec).textContent = `${popped} of 6 popped`;
       setTimeout(() => {
         b.hidden = true; $('.note', cell).hidden = false;
@@ -775,7 +991,7 @@ const ENTER = [
       if (gift.classList.contains('open')) return;
       taps++;
       if (taps < 3) { gift.classList.remove('wiggle'); void gift.offsetWidth; gift.classList.add('wiggle'); sound.tick(); hint.textContent = lines[taps]; return; }
-      gift.classList.add('open'); gift.setAttribute('aria-label', 'Gift unwrapped'); hint.textContent = 'It’s all yours!';
+      gift.classList.add('open'); $('#giftStage', sec).classList.add('open'); gift.setAttribute('aria-label', 'Gift unwrapped'); hint.textContent = 'It’s all yours!';
       const r = gift.getBoundingClientRect();
       sound.chime(); fx.sparkle(r.left + r.width / 2, r.top + r.height * .3, 22); fx.burst(r.left + r.width / 2, r.top + r.height * .35, 60, {speed: 720, spread: 1.5});
       await wait(380); const v = $('#voucher', sec); v.classList.add('up'); v.setAttribute('aria-hidden', 'false');
@@ -789,6 +1005,8 @@ const ENTER = [
     const finish = () => {
       if (finished || current !== 4) return; finished = true;
       fx.show(4); sound.chime();
+      const lr = letter.getBoundingClientRect();
+      setTimeout(() => { fx.hearts(lr.left + 10, lr.bottom - 40, 7, 12, -1); fx.hearts(lr.right - 10, lr.bottom - 40, 7, 12, 1); }, 600);
       setTimeout(() => { fx.rain(70); end.classList.add('show'); }, 900);
     };
     const t1 = setTimeout(() => letter.classList.add('reveal'), 750);
@@ -913,8 +1131,14 @@ function openEditor() {
 }
 
 /* ---------- boot ---------- */
+function makeFloaters() {
+  const box = document.createElement('div'), cols = [C.cherry, C.butter, C.sky, C.lilac, C.mint, '#ffffff'];
+  box.className = 'floaters'; box.setAttribute('aria-hidden', 'true');
+  box.innerHTML = Array.from({length: 9}, (_, i) => `<span style="--x:${(4 + i * 11 + rand(-3, 3)).toFixed(1)}%;--s:${rand(14, 26).toFixed(0)}px;--d:${rand(16, 26).toFixed(1)}s;--delay:-${rand(0, 24).toFixed(1)}s;--sw:${rand(12, 30).toFixed(0)}px">${ICON.heart(pick(cols))}</span>`).join('');
+  document.body.insertBefore(box, document.getElementById('app'));
+}
 function boot() {
-  drawSprinkles(); fx.init(); mount(); checkOwner();
+  drawSprinkles(); makeFloaters(); fx.init(); mount(); checkOwner();
   let rt = 0;
   addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { drawSprinkles(); fx.resize(); }, 160); });
 }
