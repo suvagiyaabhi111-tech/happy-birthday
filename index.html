@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Happy Birthday, Soul Sister!</title>
+<title>Happy Birthday, Babygirl!</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="A little birthday surprise is waiting for you. Tap the heart to open it.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://suvagiyaabhi111-tech.github.io/happy-birthday/">
-<meta property="og:title" content="A little birthday surprise for you 💛">
+<meta property="og:title" content="A birthday surprise from Kesha 💛">
 <meta property="og:description" content="Tap the heart to open it.">
-<meta property="og:image" content="https://suvagiyaabhi111-tech.github.io/happy-birthday/preview.png">
+<meta property="og:image" content="https://suvagiyaabhi111-tech.github.io/happy-birthday/card-preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -99,7 +99,28 @@ body.dark .scene-cake .hint{color:#EBC3B2}
 .env-letter{z-index:2; left:8%; right:8%; top:7%; height:82%; border:2.5px solid var(--ink); border-radius:10px; display:grid; align-content:start; justify-items:center; padding-top:9%;
   background:radial-gradient(circle at 14% 18%, var(--sky) 0 3px, transparent 3.5px), radial-gradient(circle at 86% 26%, var(--butter) 0 3px, transparent 3.5px), radial-gradient(circle at 22% 52%, var(--mint) 0 3px, transparent 3.5px), radial-gradient(circle at 80% 56%, var(--lilac) 0 3px, transparent 3.5px), var(--paper);
   transition:transform .85s cubic-bezier(.2,.9,.25,1.12)}
-.env-letter .peek{font:700 clamp(19px, 5.6vw, 25px)/1.05 var(--display); color:var(--cherry)}
+.env-letter .peek{display:block; width:34%}
+.env-letter .peek svg{display:block; width:100%; height:auto}
+.env-stack{transition:opacity .5s ease, transform .6s cubic-bezier(.5,0,.3,1)}
+.scene-env.revealed .env-stack{opacity:0; transform:translateY(46px) scale(.9); pointer-events:none}
+/* the greeting card that pops out of the envelope */
+.greeting{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; padding-block:84px 24px;
+  padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); visibility:hidden; pointer-events:none}
+.scene-env.revealed .greeting{visibility:visible; pointer-events:auto}
+.greet-card{position:relative; width:min(84vw, 340px); padding:60px 18px 26px; text-align:center; border:2.5px solid var(--ink); border-radius:22px; box-shadow:0 6px 0 var(--ink);
+  background:radial-gradient(circle at 12% 16%, var(--sky) 0 4px, transparent 4.5px), radial-gradient(circle at 88% 12%, var(--mint) 0 4px, transparent 4.5px), radial-gradient(circle at 9% 84%, var(--lilac) 0 4px, transparent 4.5px), radial-gradient(circle at 91% 88%, var(--tangerine) 0 4px, transparent 4.5px), radial-gradient(circle at 86% 50%, var(--pink) 0 3px, transparent 3.5px), radial-gradient(circle at 14% 48%, var(--butter) 0 3px, transparent 3.5px), var(--paper);
+  opacity:0; transform:translateY(90px) scale(.4) rotate(6deg); transition:transform .9s cubic-bezier(.2,1.35,.35,1), opacity .35s}
+.scene-env.revealed .greet-card{opacity:1; transform:rotate(-2deg); transition-delay:.12s}
+.greet-flower{position:absolute; left:50%; top:0; width:96px; margin-left:-48px; transform:translateY(-56%)}
+.greet-flower svg{display:block; width:100%; height:auto; animation:sway 4s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-9deg)} 50%{transform:rotate(9deg)}}
+.g-line{margin:0; opacity:0}
+.scene-env.revealed .g-line{animation:pop-in .7s cubic-bezier(.3,1.6,.5,1) both; animation-delay:calc(.55s + var(--i) * .18s)}
+.g-happy{font:700 clamp(30px, 9.5vw, 42px)/1 var(--display); color:var(--cherry)}
+.g-bday{font:700 clamp(38px, 12.5vw, 56px)/1.04 var(--display); color:var(--ink); text-shadow:0 4px 0 var(--butter)}
+.g-name{margin-top:10px; font:400 clamp(42px, 13vw, 60px)/1.05 var(--hand); color:var(--ink); overflow-wrap:anywhere}
+.g-name span{padding:0 10px; border-radius:6px; background:linear-gradient(transparent 56%, rgba(255,212,92,.95) 56% 88%, transparent 88%)}
+.g-from{margin-top:14px; font:400 21px/1.2 var(--hand); color:var(--ink-soft)}
 .env-pocket{z-index:3}
 .env-flap{z-index:4; transform-origin:50% 2%; transition:transform .6s cubic-bezier(.45,0,.2,1)}
 .seal{z-index:5; left:50%; top:60.5%; width:21%; aspect-ratio:1; transform:translate(-50%,-50%); transition:transform .35s cubic-bezier(.5,-.6,.5,1.6), opacity .3s .05s}
@@ -232,7 +253,7 @@ body.dark .cake-svg{filter:brightness(var(--bright,.8)) saturate(.9)}
 @media (max-width:420px){.two{grid-template-columns:1fr}}
 
 @media (prefers-reduced-motion: reduce){
-  .envelope,.balloon .bob,.bunting .flag-g.now,.seal svg,.gift .sparkle{animation:none !important}
+  .envelope,.balloon .bob,.bunting .flag-g.now,.seal svg,.gift .sparkle,.greet-flower svg{animation:none !important}
   .candle .flame{animation:none !important}
   .scene,.scene.on{transition-duration:.01s !important; transition-delay:0s !important}
   .w{transition-delay:0s !important}
@@ -243,10 +264,10 @@ body.dark .cake-svg{filter:brightness(var(--bright,.8)) saturate(.9)}
 <div id="app"></div>
 <script type="application/json" id="card-data">
 {
-  "name": "Soul Sister",
-  "from": "Abhishek",
+  "name": "Babygirl",
+  "from": "Kesha",
   "signoff": "Love always,",
-  "message": "Happiest happiest birthday! 💛🌻\n\nYou have no idea how much I respect and adore you. You are my inspiration, baby.\n\nThe strength you have… I don't think anyone else has it. Can you believe it's been almost 11 years of our friendship? 🥰\n\nYou're my big sister! I wouldn't be where I am in life if you weren't there. You're my guide and my ride-or-die.\n\nLife turned us into a long-distance friendship, but it doesn't know how much love we have for each other. Nothing will ever break it.\n\nI'm here for you 24/7! I'll always have your back, in the bad times and the good.\n\nI'm superrrrrr proud of how far you've come in life. We all love you!\n\nI miss you sooo much, you have no idea. I love you.\n\nKeep shining, my babygirl. You deserve every happiness in the world, and you will find it!!!\n\nYou always ask why God is doing this to you. It's because He knows you'll handle it like no one else can.\n\nAlways remember: you are, and always will be, special 💛💛🥺😘✨",
+  "message": "Happiest happiest birthday to my soul sister! 💛🌻\n\nYou have no idea how much I respect and adore you. You are my inspiration, baby.\n\nThe strength you have… I don't think anyone else has it. Can you believe it's been almost 11 years of our friendship? 🥰\n\nYou're my big sister! I wouldn't be where I am in life if you weren't there. You're my guide and my ride-or-die.\n\nLife turned us into a long-distance friendship, but it doesn't know how much love we have for each other. Nothing will ever break it.\n\nI'm here for you 24/7! I'll always have your back, in the bad times and the good.\n\nI'm superrrrrr proud of how far you've come in life. We all love you!\n\nI miss you sooo much, you have no idea. I love you.\n\nKeep shining, my babygirl. You deserve every happiness in the world, and you will find it!!!\n\nYou always ask why God is doing this to you. It's because He knows you'll handle it like no one else can.\n\nAlways remember: you are, and always will be, special 💛💛🥺😘✨",
   "reasons": [
     "Almost 11 years of us, and still counting!",
     "Distance can't touch what we have.",
@@ -265,7 +286,7 @@ body.dark .cake-svg{filter:brightness(var(--bright,.8)) saturate(.9)}
    The Personalize sheet (owner only) rewrites that block and republishes the page. */
 const HEAD_BITS = "\u003ctitle>Bestie Birthday Card\u003c/title>\n\u003cmeta name=\"claude:viewport-fit-sides\" content=\"cover\">\n\u003clink rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n\u003clink rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n\u003clink rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Patrick+Hand&display=swap\">\n";
 const SKELETON = ["\u003c!doctype html>\u003chtml>\u003chead>\u003cmeta charset=utf8>\u003cmeta name=viewport content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\u003cstyle>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}\u003c/style>\u003c/head>\u003cbody>\n", "\n\u003c/body>\u003c/html>"];
-const DEFAULTS = {"name": "Soul Sister", "from": "Abhishek", "signoff": "Love always,", "message": "Happiest happiest birthday! 💛🌻\n\nYou have no idea how much I respect and adore you. You are my inspiration, baby.\n\nThe strength you have… I don't think anyone else has it. Can you believe it's been almost 11 years of our friendship? 🥰\n\nYou're my big sister! I wouldn't be where I am in life if you weren't there. You're my guide and my ride-or-die.\n\nLife turned us into a long-distance friendship, but it doesn't know how much love we have for each other. Nothing will ever break it.\n\nI'm here for you 24/7! I'll always have your back, in the bad times and the good.\n\nI'm superrrrrr proud of how far you've come in life. We all love you!\n\nI miss you sooo much, you have no idea. I love you.\n\nKeep shining, my babygirl. You deserve every happiness in the world, and you will find it!!!\n\nYou always ask why God is doing this to you. It's because He knows you'll handle it like no one else can.\n\nAlways remember: you are, and always will be, special 💛💛🥺😘✨", "reasons": ["Almost 11 years of us, and still counting!", "Distance can't touch what we have.", "You're my guide and my ride-or-die.", "Your strength inspires me every day.", "I'm here for you 24/7. Always.", "My big sister, my soul sister."], "giftTitle": "One long video call, any time you want", "giftNote": "Valid 24/7. No distance too far."};
+const DEFAULTS = {"name": "Babygirl", "from": "Kesha", "signoff": "Love always,", "message": "Happiest happiest birthday to my soul sister! 💛🌻\n\nYou have no idea how much I respect and adore you. You are my inspiration, baby.\n\nThe strength you have… I don't think anyone else has it. Can you believe it's been almost 11 years of our friendship? 🥰\n\nYou're my big sister! I wouldn't be where I am in life if you weren't there. You're my guide and my ride-or-die.\n\nLife turned us into a long-distance friendship, but it doesn't know how much love we have for each other. Nothing will ever break it.\n\nI'm here for you 24/7! I'll always have your back, in the bad times and the good.\n\nI'm superrrrrr proud of how far you've come in life. We all love you!\n\nI miss you sooo much, you have no idea. I love you.\n\nKeep shining, my babygirl. You deserve every happiness in the world, and you will find it!!!\n\nYou always ask why God is doing this to you. It's because He knows you'll handle it like no one else can.\n\nAlways remember: you are, and always will be, special 💛💛🥺😘✨", "reasons": ["Almost 11 years of us, and still counting!", "Distance can't touch what we have.", "You're my guide and my ride-or-die.", "Your strength inspires me every day.", "I'm here for you 24/7. Always.", "My big sister, my soul sister."], "giftTitle": "One long video call, any time you want", "giftNote": "Valid 24/7. No distance too far."};
 const C = {ink:'#4A2420', paper:'#FFFBF4', cherry:'#F0386B', cherryDark:'#C41F4E', butter:'#FFD45C', butterDeep:'#F5B935', butterLight:'#FFE184',
   mint:'#7DDCC0', mintLight:'#A6EBD6', sky:'#86C8FF', lilac:'#C6A8FF', tangerine:'#FF9F5A', pink:'#FF8FB3', pinkLight:'#FFB3CB', cream:'#FFF2E3', blush:'#FF8FB3'};
 const PARTY = [C.cherry, C.butter, C.mint, C.sky, C.lilac, C.tangerine, C.pink];
@@ -483,6 +504,13 @@ function sealSvg() {
     <path transform="translate(-10.8 -11.6) scale(.9)" d="${HEART}" fill="${C.pinkLight}" stroke="${C.cherryDark}" stroke-width="1.7" stroke-linejoin="round"/>
     <path d="M-15 -12A19 19 0 0 1-4-18.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2.4" stroke-linecap="round"/></svg>`;
 }
+function sunflowerSvg() {
+  const ring = (off, fill, cy, rx, ry) => Array.from({length: 12}, (_, i) => `<ellipse cx="0" cy="${cy}" rx="${rx}" ry="${ry}" transform="rotate(${i * 30 + off})" fill="${fill}" stroke="${C.ink}" stroke-width="2.4"/>`).join('');
+  return `<svg viewBox="-44 -44 88 88" aria-hidden="true">${ring(15, '#FFBE2E', -24, 7.5, 15)}${ring(0, C.butter, -22, 8, 14)}
+    <circle r="16" fill="#8A5136" stroke="${C.ink}" stroke-width="2.6"/>
+    <path d="M-9-1.5q3 3.2 6 0M3-1.5q3 3.2 6 0M-4 5q4 4 8 0" fill="none" stroke="${C.cream}" stroke-width="2.1" stroke-linecap="round"/>
+    <ellipse cx="-10.5" cy="4.5" rx="3" ry="2" fill="${C.pink}"/><ellipse cx="10.5" cy="4.5" rx="3" ry="2" fill="${C.pink}"/></svg>`;
+}
 function stampSvg() {
   const w = 52, h = 62, r = 2.2, s = 6.5, f = v => v.toFixed(1);
   let d = 'M0 0';
@@ -574,12 +602,12 @@ function giftSvg() {
 const BALLOON_COLS = [C.cherry, C.sky, C.butter, C.mint, C.lilac, C.tangerine];
 const LABELS = ['Envelope', 'Birthday cake', 'Balloons', 'Gift', 'Letter'];
 const BUILD = [
-  d => `<div class="stack">
-    <p class="eyebrow">Special delivery</p>
-    <h1 class="title" tabindex="-1">A little something for you</h1>
+  d => `<div class="stack env-stack">
+    <p class="eyebrow">From ${esc(d.from)}, with love</p>
+    <h1 class="title" tabindex="-1">Guess whose birthday it is?</h1>
     <div class="env-wrap"><button class="envelope" id="envelope" type="button" aria-label="Open the envelope for ${esc(d.name)}">
       <svg class="env-back" viewBox="0 0 300 200" aria-hidden="true"><rect x="2" y="2" width="296" height="196" rx="12" fill="${C.butterDeep}" ${K3}/></svg>
-      <span class="env-letter" aria-hidden="true"><span class="peek">Happy<br>Birthday!</span></span>
+      <span class="env-letter" aria-hidden="true"><span class="peek">${sunflowerSvg()}</span></span>
       <svg class="env-pocket" viewBox="0 0 300 200" aria-hidden="true"><path d="M4 12L147 108L4 196Z" fill="${C.butter}" ${K3}/><path d="M296 12L153 108L296 196Z" fill="${C.butter}" ${K3}/><path d="M4 197L138 101Q150 92 162 101L296 197Z" fill="${C.butterLight}" ${K3}/></svg>
       <svg class="env-flap" viewBox="0 0 300 200" aria-hidden="true"><path d="M3 5L297 5L163 115Q150 126 137 115Z" fill="#FFCB3D" ${K3}/></svg>
       <span class="seal" aria-hidden="true">${sealSvg()}</span>
@@ -587,7 +615,17 @@ const BUILD = [
       <span class="stamp" aria-hidden="true">${stampSvg()}</span>
       <span class="postmark" aria-hidden="true">${postmarkSvg()}</span>
     </button></div>
-    <p class="hint" id="envHint">Tap the heart to open</p></div>`,
+    <p class="hint" id="envHint">Tap the heart to open</p></div>
+  <div class="greeting" id="greeting" aria-hidden="true">
+    <div class="greet-card">
+      <span class="greet-flower">${sunflowerSvg()}</span>
+      <p class="g-line g-happy" style="--i:0">Happy</p>
+      <p class="g-line g-bday" style="--i:1">Birthday,</p>
+      <p class="g-line g-name" style="--i:2"><span>${esc(d.name)}</span></p>
+      <p class="g-line g-from" style="--i:3">with love from ${esc(d.from)} 💛</p>
+    </div>
+    <button class="btn reveal-later" id="envNext" type="button">Let’s celebrate ${ICON.arrow}</button>
+  </div>`,
   () => `<div class="stack">
     <h2 class="title" id="cakeTitle" tabindex="-1">Make a wish…</h2>
     <p class="hint" id="cakeHint">…then blow out the candles. Tap or swipe across the flames.</p>
@@ -656,20 +694,25 @@ function go(n, first) {
 const ENTER = [
   sec => { /* envelope */
     document.body.classList.remove('dark');
-    const env = $('#envelope', sec);
+    sec.classList.remove('revealed');
+    const env = $('#envelope', sec), greeting = $('#greeting', sec), next = $('#envNext', sec);
     env.addEventListener('click', async () => {
       if (env.classList.contains('opening')) return;
+      const hadFocus = document.activeElement === env;
       sound.unlock(); sound.bloop();
       env.classList.add('opening'); $('#envHint', sec).style.opacity = '0';
       await wait(320); env.classList.add('flap-open'); sound.whoosh();
       await wait(560); env.classList.add('flap-behind', 'letter-out');
-      await wait(700);
-      const r = env.getBoundingClientRect();
-      fx.sparkle(r.left + r.width / 2, r.top, 16);
-      fx.burst(r.left + r.width / 2, r.top + r.height * .15, 46, {speed: 650, spread: 1.7});
-      sound.chime();
-      await wait(1150); if (current === 0) go(1);
+      await wait(900); if (current !== 0) return;
+      sec.classList.add('revealed'); greeting.setAttribute('aria-hidden', 'false');
+      await wait(500); if (current !== 0) return;
+      fx.cannons(); sound.chime();
+      const r = $('.greet-card', sec).getBoundingClientRect();
+      fx.sparkle(r.left + r.width / 2, r.top + 8, 22);
+      await wait(1700); if (current !== 0) return;
+      next.classList.add('show'); if (hadFocus) next.focus();
     });
+    next.addEventListener('click', () => go(1));
   },
   sec => { /* cake */
     const wrap = $('#cakeWrap', sec), candles = $$('.candle', wrap);
@@ -699,10 +742,9 @@ const ENTER = [
       await wait(30); b.classList.remove('instant');
       wrap.classList.add('happy');
       fx.cannons(); sound.song();
-      const text = `Happy Birthday, ${DATA.name}!`;
-      title.classList.toggle('small', DATA.name.length > 9);
+      const text = 'Your wish is on its way!';
       title.setAttribute('aria-label', text); title.innerHTML = lettersHtml(text);
-      hint.textContent = 'Lights on! Hope your wish comes true.'; hint.style.opacity = '1';
+      hint.textContent = `Lights on! Happy birthday, ${DATA.name} 💛`; hint.style.opacity = '1';
       await wait(1500); fx.rain(60);
       $('#cakeNext', sec).classList.add('show');
     }
